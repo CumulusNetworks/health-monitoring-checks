@@ -1,0 +1,20 @@
+# This is an example standard check that executes the plugin
+# check-cpu.rb. it sets the default critical threshold at 99%
+# with a warning alert issued at 95%
+# the check is triggered only if 3 occurrences happen within 10 minutes
+# Then every 10 minutes, if 3 occurrences happen again, another alert is triggered
+# The default handler is to send the event to logstash.
+{
+  "checks": {
+    "check_cpu": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-cpu.rb -c 99 -w 95",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "refresh": 600,
+      "handlers": ["logstash"]
+    }
+  }
+}

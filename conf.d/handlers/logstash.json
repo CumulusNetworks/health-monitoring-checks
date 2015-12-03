@@ -1,0 +1,15 @@
+# This is an example handler that sends sensu events
+# to logstash. check out the github.com/CumulusNetworks/logstash-conf
+# repo for the corresponding example logstash config
+{
+  "handlers": {
+    "logstash": {
+      "type": "tcp",
+      "socket": {
+        "host": "192.168.0.1",
+        "port": 5000
+      }
+    }
+  }
+}
+
