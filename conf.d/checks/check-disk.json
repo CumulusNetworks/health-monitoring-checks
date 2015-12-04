@@ -1,0 +1,17 @@
+# This is an example standard check that executes the plugin
+# check-disk.rb. it sets the default critical threshold at 95% on any partition
+# and/or total disk space used
+# the check is triggered only if 1 occurrence happens within 30 minutes
+{
+  "checks": {
+    "check_disk": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-disk.rb -w 85 -c 95",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["logstash"]
+    }
+  }
+}

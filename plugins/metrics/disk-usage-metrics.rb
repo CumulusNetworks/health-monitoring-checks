@@ -40,6 +40,8 @@
 #   Mountpoints can be specifically included or ignored using -i or -I options:
 #     e.g. disk-usage-metric.rb -i ^/boot,^/media
 #
+#   Original file converted by Stanley Karunditu <stanleyk@cumulusnetworks.com>
+#   to use JSON instead of Graphite format
 # LICENSE:
 #   Copyright 2012 Sonian, Inc <chefs@sonian.net>
 #   Released under the same terms as Sensu (the MIT license); see LICENSE
@@ -52,12 +54,11 @@ require 'socket'
 #
 # Disk Usage Metrics
 #
-class DiskUsageMetrics < Sensu::Plugin::Metric::CLI::Graphite
+class DiskUsageMetrics < Sensu::Plugin::Metric::CLI::JSON
   option :scheme,
          description: 'Metric naming scheme, text to prepend to .$parent.$child',
          long: '--scheme SCHEME',
-         default: "#{Socket.gethostname}.disk_usage"
-
+         default: "disk_usage"
   option :ignore_mnt,
          description: 'Ignore mounts matching pattern(s)',
          short: '-i MNT[,MNT]',
@@ -82,7 +83,7 @@ class DiskUsageMetrics < Sensu::Plugin::Metric::CLI::Graphite
          short: '-l',
          long: '--local',
          boolean: true,
-         default: false
+         default: true
 
   option :block_size,
          description: 'Set block size for sizes printed',
@@ -98,7 +99,8 @@ class DiskUsageMetrics < Sensu::Plugin::Metric::CLI::Graphite
     # #YELLOW
     `df -PB#{config[:block_size]} #{config[:local] ? '-l' : ''}`.split("\n").drop(1).each do |line|
       _, _, used, avail, used_p, mnt = line.split
-
+      diskspace = {}
+      prefix_str = 'disk_usage'
       unless %r{/sys|/dev|/run}.match(mnt)
         next if config[:ignore_mnt] && config[:ignore_mnt].find { |x| mnt.match(x) }
         next if config[:include_mnt] && !config[:include_mnt].find { |x| mnt.match(x) }
@@ -111,9 +113,10 @@ class DiskUsageMetrics < Sensu::Plugin::Metric::CLI::Graphite
         end
         # Fix subsequent slashes
         mnt = mnt.gsub '/', delim
-        output [config[:scheme], mnt, 'used'].join('.'), used.gsub(config[:block_size], '')
-        output [config[:scheme], mnt, 'avail'].join('.'), avail.gsub(config[:block_size], '')
-        output [config[:scheme], mnt, 'used_percentage'].join('.'), used_p.gsub('%', '')
+        diskspace[[config[:scheme],  'used'].join('_')] = used.gsub(config[:block_size], '').to_i
+        diskspace[[config[:scheme],  'avail'].join('_')] = avail.gsub(config[:block_size], '').to_i
+        diskspace[[config[:scheme],  'used_percentage'].join('_')] = used_p.gsub(config[:block_size], '').to_i
+        output diskspace
       end
     end
     ok
