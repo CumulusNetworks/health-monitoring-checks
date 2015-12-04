@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "check_process_watchquagga": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-process.sh -p watchquagga",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["logstash"]
+    }
+  }
+}

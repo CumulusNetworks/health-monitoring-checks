@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "check_process_bgp": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-process.sh -p bgpd",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["logstash"]
+    }
+  }
+}

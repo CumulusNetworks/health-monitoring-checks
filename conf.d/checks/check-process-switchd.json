@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "check_process_switchd": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-process.sh -p switchd",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["logstash"]
+    }
+  }
+}

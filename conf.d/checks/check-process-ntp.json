@@ -1,8 +1,8 @@
 {
   "checks": {
-    "check_bgp": {
+    "check_process_ntp": {
       "type": "standard",
-       "command": "/etc/sensu/plugins/standard/check-process..sh -p bgpd",
+       "command": "/etc/sensu/plugins/standard/check-process..sh -p ntpd",
       "interval": 10,
       "subscribers": [
         "switches"
