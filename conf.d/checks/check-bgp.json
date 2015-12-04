@@ -1,13 +1,12 @@
 {
   "checks": {
-    "check_cpu": {
+    "check_bgp": {
       "type": "standard",
-       "command": "/etc/sensu/plugins/standard/check-cpu.rb -c 99 -w 95",
+       "command": "/etc/sensu/plugins/standard/check-process..sh -p bgpd",
       "interval": 10,
       "subscribers": [
         "switches"
       ],
-      "refresh": 600,
       "handlers": ["logstash"]
     }
   }
