@@ -1,0 +1,18 @@
+# Collects memory metrics such as total, free, buffer, cached and swap space
+# This can be sent to logstash for some little mangling so that it
+# can be stored in a datastore like Elasticsearch. See
+# github.com/CumulusNetworks/logstash-conf for more details on the logstash config.
+# CPU metrics are collected every 10 seconds.
+{
+  "checks": {
+    "memory_metrics": {
+      "type": "metric",
+       "command": "/etc/sensu/plugins/metrics/memory-usage-metrics.rb",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["logstash"]
+    }
+  }
+}

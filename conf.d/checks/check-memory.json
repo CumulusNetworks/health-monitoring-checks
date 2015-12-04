@@ -1,0 +1,21 @@
+# This is an example standard check that executes the plugin
+# check-memory.rb. it sets the default critical threshold at 95% and a
+# warn threshold on 85%.
+# the check is triggered only if 3 occurrences happens within 10 minutes
+# when the check is triggered a copy of the event is sent to logstash for further
+# processing and storage in a datastore.
+{
+  "checks": {
+    "check_memory": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-memory.rb -w 85 -c 95",
+      "interval": 10,
+      "occurrences": 3,
+      "refresh": 600,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["logstash"]
+    }
+  }
+}
