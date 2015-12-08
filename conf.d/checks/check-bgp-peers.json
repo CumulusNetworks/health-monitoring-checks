@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "check_bgp_peers": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-bgp-peers.rb",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["debug"]
+    }
+  }
+}

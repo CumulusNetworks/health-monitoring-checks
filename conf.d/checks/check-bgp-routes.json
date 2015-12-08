@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "check_bgp_routes": {
+      "type": "standard",
+       "command": "/etc/sensu/plugins/standard/check-bgp-routes.rb",
+      "interval": 10,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["debug"]
+    }
+  }
+}
