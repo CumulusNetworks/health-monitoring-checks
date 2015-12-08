@@ -2,6 +2,10 @@
 According to the creator of JSON, JSON should have no comments. No moved all the
 comments out of the JSON files into this README.
 
+## client.json.example
+Example of client.json file. Shows how to set the thresholds as well as how to
+set the handler when the keepalive between client/server fails.
+
 ##check-bgp-peers.json
 Checks how many non-established BGP peers are present on
 a switch. The default is to send a critical alert when a non-established BGP
