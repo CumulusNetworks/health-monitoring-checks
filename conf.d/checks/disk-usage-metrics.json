@@ -1,8 +1,3 @@
-# Collects disk  metrics shown in check-disk.rb as JSON output
-# This can be sent to logstash for some little mangling so that it
-# can be stored in a datastore like Elasticsearch. See
-# github.com/CumulusNetworks/logstash-conf for more details on the logstash config.
-# CPU metrics are collected every 10 seconds.
 {
   "checks": {
     "cpu_metrics": {

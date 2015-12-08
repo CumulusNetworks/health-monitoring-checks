@@ -7,7 +7,7 @@
       "subscribers": [
         "switches"
       ],
-      "handlers": ["logstash"]
+      "handlers": ["debug"]
     }
   }
 }

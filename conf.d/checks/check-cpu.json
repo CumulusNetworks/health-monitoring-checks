@@ -8,7 +8,7 @@
         "switches"
       ],
       "refresh": 600,
-      "handlers": ["logstash"]
+      "handlers": ["debug"]
     }
   }
 }
