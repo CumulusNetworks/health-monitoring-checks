@@ -62,7 +62,7 @@ require 'sensu-plugin/metric/cli'
 require 'json'
 require 'socket'
 
-class RoutingProtocolStats < Sensu::Plugin::Metric::CLI::JSON
+class RoutingProtocolMetrics < Sensu::Plugin::Metric::CLI::JSON
   option :route_protocol,
          description: 'What type of routing protocol. Right now only supports "bgp"',
          short: '-r ROUTE_PROTOCOL',

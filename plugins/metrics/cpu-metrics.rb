@@ -37,7 +37,7 @@ require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/metric/cli'
 require 'json'
 
-class CheckCPU < Sensu::Plugin::Metric::CLI::JSON
+class CpuMetrics < Sensu::Plugin::Metric::CLI::JSON
   option :warn,
          short: '-w WARN',
          proc: proc(&:to_f),

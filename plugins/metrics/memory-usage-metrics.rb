@@ -33,7 +33,7 @@ require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/metric/cli'
 require 'socket'
 
-class MemoryGraphite < Sensu::Plugin::Metric::CLI::JSON
+class MemoryMetrics < Sensu::Plugin::Metric::CLI::JSON
   option :scheme,
          description: 'Metric naming scheme, text to prepend to metric',
          short: '-s SCHEME',
