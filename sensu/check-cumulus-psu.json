@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "check_cumulus_psu": {
+      "type": "standard",
+      "standard": true,
+       "command": "/etc/sensu/plugins/standard/check-cumulus-sw-psu.py --min-psu 2",
+      "interval": 60,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["debug"]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "check_process_ntp": {
+      "type": "standard",
+      "standalone": true,
+      "command": "/etc/sensu/plugins/check-process.sh -p ntpd",
+      "interval": 60,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["debug"]
+    }
+  }
+}

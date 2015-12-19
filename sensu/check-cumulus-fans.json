@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "check_cumulus_fans": {
+      "type": "standard",
+      "standard": true,
+      "command": "/etc/sensu/plugins/check-cumulus-sw-fans.py -w 95 -c 99 --min-fans 5",
+      "interval": 60,
+      "subscribers": [
+        "switches"
+      ],
+      "handlers": ["debug"]
+    }
+  }
+}
