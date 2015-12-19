@@ -4,6 +4,23 @@ The check plugins defined in this repo are designed to work in Nagios, Sensu,
 Consul and any other Nagios compatible health monitoring system that can run
 on Cumulus Linux
 
+## Directory Structure
+
+* Plugins: List of Health monitoring plugins written mainly in BASH and Python
+* Sensu: Sensu Configuration json file examples using the plugins found in this
+  directory. The list of checks configured are a list suggested by Cumulus
+Networks.
+
+
+###CONTRIBUTING
+
+
+1. Fork it.
+2. Create your feature branch (`git checkout -b my-new-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin my-new-feature`).
+5. Create new Pull Request.
+
 ## License and Authors
 
 * Author:: Cumulus Networks Inc.
@@ -11,6 +28,11 @@ on Cumulus Linux
 * Copyright:: 2015 Cumulus Networks Inc.
 
 Licensed under the MIT License.
+
+
+### TODO
+Upstream the new and/or heavily monitoring checks to [Nagios Exchange](https://exchange.nagios.org/)
+
 
 ---
 
