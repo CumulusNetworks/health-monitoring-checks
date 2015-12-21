@@ -73,6 +73,7 @@ if __name__ == "__main__":
         description="Check Quagga BGP Route Count")
     parser.add_argument('-m', '--min-routes',
                         type=int,
+                        default=0,
                         metavar='NUMBER',
                         help='Min number of routes before issuing critical ' +
                         'alert')
