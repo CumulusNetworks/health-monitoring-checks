@@ -109,7 +109,7 @@ if __name__ == "__main__":
     parser.add_argument('--min-fans',
                         type=int,
                         metavar='NUMBER',
-                        help='Minimum number of Fans')
+                        help='Minimum number of Fans - REQUIRED. Changes per platform')
 
     if (len(sys.argv) < 2):
         print_help(parser)
