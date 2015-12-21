@@ -39,7 +39,6 @@
 """
 
 import argparse
-import sys
 import json
 import subprocess
 
@@ -75,11 +74,10 @@ if __name__ == "__main__":
         description="Check Quagga BGP Peers")
     parser.add_argument('-m', '--min-down-peers',
                         type=int,
+                        default=1,
                         metavar='NUMBER',
                         help='Number of non-established BGP peers ' +
                         'needed to generate an alert')
 
-    if (len(sys.argv) < 2):
-        print_help(parser)
     _args = parser.parse_args()
     check_bgp_peers(_args)
