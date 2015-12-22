@@ -1,3 +1,5 @@
+# **This directory contains health check plugins and check definitions which are still being developed and are still in the alpha testing stage.**
+
 # Cumulus Health Monitoring Checks
 
 The check plugins defined in this repo are designed to work in Nagios, Sensu,

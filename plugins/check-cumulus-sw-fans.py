@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 """
+ This filename contains a health monitoring plugin which is still
+ being developed and is still in the alpha testing stage.
+ ----------------------------------------------------------------
+
  check-cumulus-sw-fans
 
  DESCRIPTION
