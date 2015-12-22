@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
- check-cumulus-sw-temp
+ check_cumulus_sw_temp
 
  DESCRIPTION
    Check Cumulus Switch Temperatures. Alerts based on
@@ -48,7 +48,7 @@ import json
 import subprocess
 
 
-def check_temp(_args):
+def check_temp():
     """ Main function to check Switch temperature
     """
     try:
@@ -66,15 +66,15 @@ def check_temp(_args):
             _crit = float(_sensor.get('crit'))
             _max = float(_sensor.get('max'))
             _curr = float(_sensor.get('input'))
-            _send_warn = (_curr / _max < 0.02)
-            _send_crit = (_curr / _crit < 0.02)
+            _send_warn = ((_max - _curr) / 100) < 0.02
+            _send_crit = ((_crit - _max) / 100) < 0.02
             if _send_crit:
                 _msg = "CRITICAL: %s - " % (_sensor.get('description')) + \
-                    "Current:%s Max:%s Threshold:%s%%" % (_curr, _max, _args.critical)
+                    "Current:%s Threshold:%s " % (_curr, _crit)
                 _code = 2
             elif _send_warn:
                 _msg = "WARNING: %s - " % (_sensor.get('description')) + \
-                    "Current:%s Max:%s Threshold:%s%%" % (_curr, _max, _args.warning)
+                    "Current:%s Threshold:%s" % (_curr, _max)
                 _code = 1
     if _msg:
         print(_msg)
@@ -91,4 +91,4 @@ if __name__ == "__main__":
         description="Check Cumulus Switch Temp. Alerts when temp is within 2% " +
         "of warning(max) or critical(crit) levels defined in 'smonctl -v' output")
     _args = parser.parse_args()
-    check_temp(_args)
+    check_temp()
