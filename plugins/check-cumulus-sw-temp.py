@@ -3,7 +3,10 @@
  check-cumulus-sw-temp
 
  DESCRIPTION
-   Check Cumulus Switch Temperatures
+   Check Cumulus Switch Temperatures. Alerts based on
+   numbers provided in smonctl -v. There is the 'max' value
+   which maps to a warning. and the 'crit' value which maps
+   to a critical alert.
 
  OUTPUT
     plain text
@@ -15,19 +18,20 @@
     Python 2.7+
 
  USAGE:
-   check-cumulus-sw-temp -w 85 -c 97
+   check-cumulus-sw-temp
 
  ARGUMENTS:
-   --critical: Critical threshold percentage.
-               Set exit code to 2 if any temperature sensor is above the critical
-               threshold. Default is 90
-   -c: alias for --critical
-   --warning: Warning threshold percentaged
-              Set exit code to 1 if any temperature sensor is above the warning
-              threshold. Default is 95
-   -w: alias for --warning
+     None
 
  NOTES:
+     Smonctl provides a warning (max) and critical (crit) threshold
+     level output in its output.
+     Use this as a guide to generate a warning and critical message.
+     Warning message is issued when current Temp is less than 2% of
+     max (warning) temp level
+     Critical message is issued when current Temp is less than 2% of
+     crit (critical) temp level.
+     When the switch reaches critical level it shuts down.
 
  TODO:
    Support More granular checks like CPU Temp Sensors or Inlet or Outlet Sensors
@@ -40,7 +44,6 @@
 """
 
 import argparse
-import sys
 import json
 import subprocess
 
@@ -60,14 +63,16 @@ def check_temp(_args):
     for _sensor in smon_output:
         if _sensor.get('type') == 'temp' and \
                 _sensor.get('state') == 'OK':
+            _crit = float(_sensor.get('crit'))
             _max = float(_sensor.get('max'))
             _curr = float(_sensor.get('input'))
-            _percent_diff = (_curr/_max) * 100
-            if _args.critical and _percent_diff > _args.critical:
+            _send_warn = (_curr / _max < 0.02)
+            _send_crit = (_curr / _crit < 0.02)
+            if _send_crit:
                 _msg = "CRITICAL: %s - " % (_sensor.get('description')) + \
                     "Current:%s Max:%s Threshold:%s%%" % (_curr, _max, _args.critical)
                 _code = 2
-            elif _args.warning and _percent_diff > _args.warning:
+            elif _send_warn:
                 _msg = "WARNING: %s - " % (_sensor.get('description')) + \
                     "Current:%s Max:%s Threshold:%s%%" % (_curr, _max, _args.warning)
                 _code = 1
@@ -83,18 +88,7 @@ def print_help(parser):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Check Cumulus Switch Temp")
-    parser.add_argument('-w', '--warning',
-                        type=int,
-                        metavar='PERCENT',
-                        default=90,
-                        help='Percent Warning Threshold for Switch Temp')
-    parser.add_argument('-c', '--critical',
-                        type=int,
-                        default=90,
-                        metavar='PERCENT',
-                        help='Percent Critical Threshold for Switch Temp')
-    if (len(sys.argv) < 2):
-        print_help(parser)
+        description="Check Cumulus Switch Temp. Alerts when temp is within 2% " +
+        "of warning(max) or critical(crit) levels defined in 'smonctl -v' output")
     _args = parser.parse_args()
     check_temp(_args)
