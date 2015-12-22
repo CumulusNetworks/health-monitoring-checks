@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
- check_cumulus_sw_temp
+ check-cumulus-sw-temp
 
  DESCRIPTION
    Check Cumulus Switch Temperatures. Alerts based on
@@ -27,9 +27,9 @@
      Smonctl provides a warning (max) and critical (crit) threshold
      level output in its output.
      Use this as a guide to generate a warning and critical message.
-     Warning message is issued when current Temp is less than 2% of
+     Warning message is issued when current Temp is less than 2 degrees of
      max (warning) temp level
-     Critical message is issued when current Temp is less than 2% of
+     Critical message is issued when current Temp is less than 2 degrees of
      crit (critical) temp level.
      When the switch reaches critical level it shuts down.
 
@@ -66,8 +66,8 @@ def check_temp():
             _crit = float(_sensor.get('crit'))
             _max = float(_sensor.get('max'))
             _curr = float(_sensor.get('input'))
-            _send_warn = ((_max - _curr) / 100) < 0.02
-            _send_crit = ((_crit - _max) / 100) < 0.02
+            _send_warn = (_max - _curr) < 2
+            _send_crit = (_crit - _curr) < 2
             if _send_crit:
                 _msg = "CRITICAL: %s - " % (_sensor.get('description')) + \
                     "Current:%s Threshold:%s " % (_curr, _crit)

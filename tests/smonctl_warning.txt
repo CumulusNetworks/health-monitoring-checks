@@ -504,7 +504,7 @@
         "state": "OK",
         "prev_state": "OK",
         "msg": null,
-        "input": 55,
+        "input": 53,
         "type": "temp",
         "description": "Temp Sensor close to Networking ASIC",
         "thres_action_path": null,
