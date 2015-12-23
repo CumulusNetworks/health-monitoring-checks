@@ -58,7 +58,7 @@ def check_fans(_args):
         print("problem executing smonctl %s " % (e))
         exit(2)
     smon_output = json.loads(json_str)
-    fan_count = check_fan_speeds(smon_output)
+    fan_count = check_fan_speeds(smon_output, _args)
     if fan_count < _args.min_fans:
         _msg = "CRITICAL: Fan may be DOWN - Current:%s Min:%s" \
             % (fan_count, _args.min_fans)
@@ -66,7 +66,7 @@ def check_fans(_args):
         exit(2)
 
 
-def check_fan_speeds(smon_output):
+def check_fan_speeds(smon_output, _args):
     _msg = None
     _code = 0
     fan_count = 0

@@ -35,7 +35,7 @@
         "state": "OK",
         "prev_state": "OK",
         "var": 15,
-        "input": 11988,
+        "input": 18000,
         "type": "fan",
         "description": "Fan Tray 0",
         "max": 19000,
