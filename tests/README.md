@@ -20,7 +20,8 @@ Example:
 ```
 easy_install pip
 pip -V
-pip install -r tests/pip_requirements.txt
+pip install -r pip_requirements.txt
+cd ..
 nosetests -v
 ```
 
