@@ -55,11 +55,11 @@ def check_psu(_args):
         if _sensor.get('type') == 'power' and \
                 _sensor.get('state') == 'OK':
             psu_count += 1
-            if psu_count < _args.min_psu:
-                _msg = "CRITICAL: Power Supply Count Low - Current:%s Threshold:%s" \
-                    % (psu_count, _args.min_psu)
-                print(_msg)
-                exit(2)
+    if psu_count < _args.min_psu:
+        _msg = "CRITICAL: Power Supply Count Low - Current:%s Threshold:%s" \
+            % (psu_count, _args.min_psu)
+        print(_msg)
+        exit(2)
 
 
 def print_help(parser):
