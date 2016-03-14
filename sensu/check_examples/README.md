@@ -70,14 +70,6 @@ Jdoo in Cumulus 2.5.X is responsible for maintaining the process state of
 ``switchd``, ``switchd`` and ``watchquagga``. It is important this process
 is never down. It should be a very rare occurrence.
 
-### check-process-ntp.json
-Suggested check interval is 60 seconds
-Currently Jdoo does not manage, out of the box the NTP process. NTP
-is important for monitoring, CLAG and other processes running in the
-Cumulus switch. The suggestion is to have Jdoo (if using Cumulus 2.5.X)
-to manage NTP and ensure it stays up. But nonetheless its good to monitor
-NTP and ensure that it is syncing the clock.
-
 ### check-process-switchd.json
 Suggested check interval is 60 seconds
 Switchd is probably the most critical process on the Cumulus Linux platform.
