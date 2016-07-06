@@ -1,0 +1,38 @@
+---
+interfaces:
+
+  server1:
+    lo:
+      ipv6: "fd::1/128"
+      ipv4: "10.0.0.1/32"
+
+    enp0s8:
+      alias: "To leaf 1"
+
+    enp0s9:
+      alias: "To leaf 2"
+
+  server2:
+    lo:
+      ipv6: "fd::2/128"
+      ipv4: "10.0.0.2/32"
+
+    enp0s8:
+      alias: "To leaf 3"
+
+    enp0s9:
+      alias: "To leaf 4"
+
+bgp:
+
+  server1:
+    asn: "65501"
+    tor_ports: ["enp0s8", "enp0s9"]
+
+  server2:
+    asn: "65502"
+    tor_ports: ["enp0s8", "enp0s9"]
+
+grafana:
+  api_key: "eyJrIjoiTjhIdnhkNmg2R2VIa0JHU2FGQTBDZjVIRndOOVNHYzciLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
+

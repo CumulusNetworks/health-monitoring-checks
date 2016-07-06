@@ -1,0 +1,14 @@
+---
+- name: Disable AAAA DNS lookups
+  replace:
+    dest=/etc/gai.conf
+    regexp="#precedence ::ffff:0:0/96  10"
+    replace="precedence ::ffff:0:0/96  100"
+
+- name: Copy /etc/network/interfaces
+  template: src=interfaces.j2 dest=/etc/network/interfaces
+  notify: reload networking
+
+- name: Copy Quagga Configuration
+  template: src=Quagga.conf.j2 dest=/etc/quagga/Quagga.conf
+  notify: reload quagga

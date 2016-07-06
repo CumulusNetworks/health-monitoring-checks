@@ -1,0 +1,38 @@
+---
+# Setuptools is required for ifupdown2
+- name: Check if setuptools is installed
+  stat:
+    path: /usr/local/bin/easy_install
+  register: setuptools
+
+- name: Download setuptools
+  get_url: >
+    url=https://bootstrap.pypa.io/ez_setup.py dest=/home/vagrant/ez_setup.py
+  when: not setuptools.stat.exists
+
+- name: Install setuptools
+  shell: python ez_setup.py
+  when: not setuptools.stat.exists
+
+#- pause: seconds=10 prompt="Delay due to apt problem on bento box"
+# Using apt to install the older ifupdown2
+# this is the simplest way to deal with general dependencies
+- name: Install old ifupdown2 via apt
+  apt: name=ifupdown2 state=present update_cache=yes
+
+- name: Download ifupdown2
+  get_url: >
+    url=http://repo3.cumulusnetworks.com/repo/pool/cumulus/i/ifupdown2/ifupdown2_1.1-cl3u3_all.deb
+    dest=/home/vagrant/ifupdown2.deb
+
+# Cumulus ifupdown2 hasn't been upstreamed yet. Install it from their repo
+- name: Update ifupdown2 with latest cumulus version
+  apt: deb=/home/vagrant/ifupdown2.deb
+
+# Bridge-utils is required for ifupdown2
+- name: Install bridge-utils
+  apt: name=bridge-utils state=present update_cache=yes
+
+# python-mako is required for ifupdown2
+- name: Install python python-mako
+  apt: name=python-mako state=present

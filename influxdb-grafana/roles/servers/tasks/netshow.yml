@@ -1,0 +1,12 @@
+---
+# Python pip is required for netshow
+- name: Install Python Pip
+  apt: name=python-pip state=present
+
+- name: Install LLDP
+  apt: name=lldpd state=present
+  notify: start lldp
+
+# Netshow simplifies network troubleshooting
+- name: Install Netshow
+  pip: name=netshow-linux-lib
