@@ -1,12 +1,25 @@
 ---
 - name: restart quagga
-  service: name=quagga state=restarted
+  service:
+    name: quagga
+    state: restarted
 
 - name: reload networking
   shell: "ifreload -a"
 
 - name: reload quagga
-  service: name=quagga state=reloaded
+  service:
+    name: quagga
+    state: reloaded
 
 - name: start lldp
-  service: name=lldpd state=started enabled=yes
+  service:
+    name: lldpd
+    state: started
+    enabled: yes
+
+- name: restart telegraf
+  service:
+    name: telegraf
+    state: restarted
+    enabled: yes

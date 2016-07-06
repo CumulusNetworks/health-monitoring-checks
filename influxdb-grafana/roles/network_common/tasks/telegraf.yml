@@ -1,0 +1,44 @@
+---
+- name: Add Telegraf repo key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: Add Telegraf apt repo
+  apt_repository:
+    repo: "deb https://repos.influxdata.com/debian jessie stable"
+    state: present
+
+- name: Install Telegraf
+  apt:
+    name: telegraf
+    update_cache: yes
+    state: present
+
+- name: Configure telegraf service
+  service:
+    name: telegraf
+    state: started
+    enabled: yes
+
+- name: Add telegraph to vtysh sudo users
+  lineinfile:
+    dest: "/etc/sudoers"
+    regexp: '^telegraf'
+    line: 'telegraf ALL=(root) NOPASSWD: /usr/bin/vtysh,/usr/bin/fping'
+    validate: 'visudo -cf %s'
+
+- name: add telegraf to adm group so that it can run lldpctl without errors
+  user:  name=telegraf append=yes groups=adm
+
+- name: Copy telegraf configuration
+  template:
+    src: telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+  notify: restart telegraf
+
+- name: Copy bgp script
+  copy:
+      src: stream_bgp_metrics.py
+      dest: /usr/local/bin/bgp-stats-influxdb.py
+      mode: 0755
