@@ -71,7 +71,8 @@
       url: "http://localhost:8086"
       access: "proxy"
       database: "network"
-      isDefault: "true"
+      isDefault: True
       user: "admin"
       password: "admin"
     body_format: json
+    method: POST
