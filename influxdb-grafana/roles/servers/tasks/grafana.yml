@@ -21,6 +21,7 @@
     state: started
     enabled: yes
 
+# Wait for Grafana to start
 - wait_for:
     port: 3000
 
@@ -45,16 +46,21 @@
     dest: roles/servers/vars/main.yml
     regexp: "api_key:"
     line: "  api_key: \"{{webpage.json.key}}\""
-    #line: "api_key: \"{{webpage.json.key}}\""
   delegate_to: localhost
   become: false
   when: webpage.status == 200
 
+# When the API key is set in the vars file the first time
+# we don't have knowledge of it in this playbook yet.
+# This sets a temporary fact to use for the rest of the play
 - name: Set API Key
   set_fact:
     grafana: {api_key: "{{webpage.json.key}}"}
   when: webpage.status == 200
 
+
+# This reports back "okay" but doesn't actually add the datasource
+# Needs further work on what is happening with the body options
 - name: Add influxdb datasource
   uri:
     url: "http://localhost:3000/api/datasources"
@@ -69,6 +75,3 @@
       user: "admin"
       password: "admin"
     body_format: json
-  register: response
-
-- debug: var="{{response}}"
