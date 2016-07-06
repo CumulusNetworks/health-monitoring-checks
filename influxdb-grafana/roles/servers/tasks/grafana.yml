@@ -59,8 +59,7 @@
   when: webpage.status == 200
 
 
-# This reports back "okay" but doesn't actually add the datasource
-# Needs further work on what is happening with the body options
+# Status 500 is reported if the datasource is added a second time
 - name: Add influxdb datasource
   uri:
     url: "http://localhost:3000/api/datasources"
@@ -76,3 +75,23 @@
       password: "admin"
     body_format: json
     method: POST
+    status_code: 200, 500
+
+- name: Add single dashboard
+  uri:
+    url: "http://localhost:3000/api/dashboards/db"
+    method: POST
+    body_format: raw
+    HEADER_Authorization: "Bearer {{ grafana.api_key}}"
+    HEADER_Content-Type: "application/json"
+    body: "{{ lookup('file', 'roles/servers/files/single_switch_dashboard_basic.json') }}"
+
+- name: Add main dashboard
+  uri:
+    url: "http://localhost:3000/api/dashboards/db"
+    method: POST
+    body_format: raw
+    HEADER_Authorization: "Bearer {{ grafana.api_key}}"
+    HEADER_Content-Type: "application/json"
+    body: "{{ lookup('file', 'main_dashboard.json') }}"
+  ignore_errors: yes

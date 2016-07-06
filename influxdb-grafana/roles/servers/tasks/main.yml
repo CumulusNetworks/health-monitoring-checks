@@ -5,9 +5,9 @@
 #     upgrade: dist
 #     update_cache: yes
 
-- include: ifupdown2.yml
-- include: quagga_install.yml
-- include: netshow.yml
-- include: network_configs.yml
-- include: influxdb.yml
+# - include: ifupdown2.yml
+# - include: quagga_install.yml
+# - include: netshow.yml
+# - include: network_configs.yml
+# - include: influxdb.yml
 - include: grafana.yml
