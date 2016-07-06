@@ -59,8 +59,16 @@
   uri:
     url: "http://localhost:3000/api/datasources"
     HEADER_Authorization: "Bearer {{grafana.api_key}}"
+    body:
+      name: "influx"
+      type: "influxdb"
+      url: "http://localhost:8086"
+      access: "proxy"
+      database: "network"
+      isDefault: "true"
+      user: "admin"
+      password: "admin"
     body_format: json
-    body: "{{ lookup('template', 'grafana_datasource.json.j2') }}"
   register: response
 
 - debug: var="{{response}}"
