@@ -1,0 +1,7 @@
+There are a couple of dependencies to be aware of:
+
+Server 1:
+- ensure you've either installed httplib2 or are using Ansible 2.x
+
+Ensure that you don't have InfluxDB running locally or you'll have port forwarding conflicts with Vagrant.
+This same goes for other open ports that may be in conflict.
