@@ -34,5 +34,5 @@ bgp:
     tor_ports: ["enp0s8", "enp0s9"]
 
 grafana:
-  api_key: "eyJrIjoiYXNZN3M1Q1hHZVd2bWtKTWNDUU9RWGJ1SERRMzEybGkiLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
+  api_key: "eyJrIjoiUTFMb0JqamdMNzk5N3FOeFBSMVBQUEJOWWdqWk5XM0UiLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
 
