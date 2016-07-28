@@ -14,7 +14,6 @@
   shell: python ez_setup.py
   when: not setuptools.stat.exists
 
-#- pause: seconds=10 prompt="Delay due to apt problem on bento box"
 # Using apt to install the older ifupdown2
 # this is the simplest way to deal with general dependencies
 - name: Install old ifupdown2 via apt
