@@ -10,4 +10,6 @@
 - include: netshow.yml
 - include: network_configs.yml
 - include: influxdb.yml
+  when: ansible_hostname != "server2"
 - include: grafana.yml
+  when: ansible_hostname != "server2"
