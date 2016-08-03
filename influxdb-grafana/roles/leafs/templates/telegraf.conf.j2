@@ -16,6 +16,7 @@
 
 # Global tags can be specified here in key="value" format.
 [global_tags]
+  role = "leaf"
   # dc = "us-east-1" # will tag all metrics with dc=us-east-1
   # rack = "1a"
   ## Environment variables can be used as tags, and throughout the config file
@@ -122,7 +123,7 @@
 # Read metrics about cpu usage
 [[inputs.cpu]]
   ## Whether to report per-cpu stats or not
-  percpu = true
+  percpu = false
   ## Whether to report total system cpu stats or not
   totalcpu = true
   ## Comment this line if you want the raw CPU time metrics
@@ -151,7 +152,7 @@
 
 
 # Get kernel statistics from /proc/stat
-[[inputs.kernel]]
+#[[inputs.kernel]]
   # no configuration
 
 
@@ -161,29 +162,29 @@
 
 
 # Get the number of processes and group them by status
-[[inputs.processes]]
+#[[inputs.processes]]
   # no configuration
 
 
 # Read metrics about swap memory usage
-[[inputs.swap]]
+#[[inputs.swap]]
   # no configuration
 
 
 # Read metrics about system load & uptime
-[[inputs.system]]
+#[[inputs.system]]
   # no configuration
 
 
 # # Read metrics from one or more commands that can output to stdout
-[[inputs.exec]]
+{# [[inputs.exec]]
   commands = ['/usr/local/bin/bgp-stats-influxdb.py']
   name_prefix = "bgp_stats_"
-  data_format = "json"
+  data_format = "json" #}
 
-[[inputs.exec]]
-  commands = ['/usr/local/bin/fping-influxdb.py']
-  data_format = "influx"
+#[[inputs.exec]]
+#  commands = ['/usr/local/bin/fping-influxdb.py']
+#  data_format = "influx"
 #   ## Commands array
 #   commands = ["/tmp/test.sh", "/usr/bin/mycollector --foo=bar"]
 #

@@ -16,3 +16,9 @@
     src: fping_influxdb.py.j2
     dest: /usr/local/bin/fping-influxdb.py
     mode: 0755
+
+- name: Copy telegraf configuration
+  template:
+    src: telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+  notify: restart telegraf
