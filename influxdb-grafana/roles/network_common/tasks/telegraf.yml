@@ -34,21 +34,32 @@
     append: yes
     groups: adm
 
-- name: Install GCC, requirement for ujson
-  apt:
-    name: gcc
-    state: present
+- name: Copy BGP Neighbor Check
+  copy:
+      src: bgp_neighbor_data.py
+      dest: /etc/telegraf/checks/
 
-- name: Install python-dev, requirement for ujson
-  apt:
-    name: python-dev
-    state: present
+- name: Install ujson binary
+  copy:
+    src: ujson.so
+    dest: /usr/local/lib/python2.7/dist-packages/
 
-- name: Install python pip
-  apt:
-    name: python-pip
-    state: present
+## If copying the files for ujson library doesn't work, here's how to build it manually.
+# - name: Install GCC, requirement for ujson
+#   apt:
+#     name: gcc
+#     state: present
 
-- name: Install ujson
-  pip:
-    name: ujson
+# - name: Install python-dev, requirement for ujson
+#   apt:
+#     name: python-dev
+#     state: present
+
+# - name: Install python pip
+#   apt:
+#     name: python-pip
+#     state: present
+
+# - name: Install ujson
+#   pip:
+#     name: ujson
