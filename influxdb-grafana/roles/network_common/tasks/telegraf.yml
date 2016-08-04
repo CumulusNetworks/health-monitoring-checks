@@ -29,4 +29,26 @@
     validate: 'visudo -cf %s'
 
 - name: add telegraf to adm group so that it can run lldpctl without errors
-  user:  name=telegraf append=yes groups=adm
+  user:
+    name: telegraf
+    append: yes
+    groups: adm
+
+- name: Install GCC, requirement for ujson
+  apt:
+    name: gcc
+    state: present
+
+- name: Install python-dev, requirement for ujson
+  apt:
+    name: python-dev
+    state: present
+
+- name: Install python pip
+  apt:
+    name: python-pip
+    state: present
+
+- name: Install ujson
+  pip:
+    name: ujson
