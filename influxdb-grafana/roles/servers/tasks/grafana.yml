@@ -77,14 +77,14 @@
     method: POST
     status_code: 200, 500
 
-- name: Add single dashboard
-  uri:
-    url: "http://localhost:3000/api/dashboards/db"
-    method: POST
-    body_format: raw
-    HEADER_Authorization: "Bearer {{ grafana.api_key}}"
-    HEADER_Content-Type: "application/json"
-    body: "{{ lookup('file', 'roles/servers/files/single_switch_dashboard_basic.json') }}"
+# - name: Add single dashboard
+#   uri:
+#     url: "http://localhost:3000/api/dashboards/db"
+#     method: POST
+#     body_format: raw
+#     HEADER_Authorization: "Bearer {{ grafana.api_key}}"
+#     HEADER_Content-Type: "application/json"
+#     body: "{{ lookup('file', 'roles/servers/files/updated_dashboard.json') }}"
 
 - name: Add main dashboard
   uri:
@@ -93,5 +93,5 @@
     body_format: raw
     HEADER_Authorization: "Bearer {{ grafana.api_key}}"
     HEADER_Content-Type: "application/json"
-    body: "{{ lookup('file', 'main_dashboard.json') }}"
+    body: "{{ lookup('file', 'dashboards/datacenter_fabric.json') }}"
   ignore_errors: yes
