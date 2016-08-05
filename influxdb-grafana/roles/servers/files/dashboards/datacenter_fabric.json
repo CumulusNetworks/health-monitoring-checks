@@ -286,6 +286,129 @@
       "height": "250px",
       "panels": [
         {
+          "title": "Disk Utilization",
+          "error": false,
+          "span": 12,
+          "editable": true,
+          "type": "graph",
+          "isNew": true,
+          "id": 4,
+          "targets": [
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$network$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "path",
+                  "operator": "=",
+                  "value": "/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "path"
+                  ]
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "used_percent"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "A",
+              "measurement": "disk"
+            }
+          ],
+          "datasource": "${DS_INFLUX}",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            },
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true
+          },
+          "grid": {
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 0,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true,
+            "sort": 0,
+            "msResolution": false
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "links": []
+        }
+      ],
+      "title": "New row"
+    },
+    {
+      "title": "New row",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "panels": [
+        {
           "title": "Leaf 1 swp1 Peer Stats",
           "error": false,
           "span": 12,
@@ -585,13 +708,12 @@
           "seriesOverrides": [],
           "links": []
         }
-      ],
-      "title": "New row"
+      ]
     }
   ],
   "time": {
-    "from": "2016-08-04T22:04:00.316Z",
-    "to": "2016-08-04T23:33:29.836Z"
+    "from": "now-24h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -675,9 +797,9 @@
   "annotations": {
     "list": []
   },
-  "refresh": false,
+  "refresh": "5s",
   "schemaVersion": 12,
-  "version": 4,
+  "version": 5,
   "links": [],
   "gnetId": null
 }
