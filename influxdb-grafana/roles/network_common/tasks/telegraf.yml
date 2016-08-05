@@ -36,7 +36,7 @@
 
 - name: Copy BGP Neighbor Check
   copy:
-      src: bgp_neighbor_data.py
+      src: telegraf_checks/bgp_neighbor_data.py
       dest: /etc/telegraf/checks/
 
 - name: Install ujson binary
