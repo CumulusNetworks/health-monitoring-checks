@@ -88,7 +88,7 @@
 
 
 # If the dashboard loads, but the data source can not be found
-# edit the json file, looking for "${DS_INFLUX}" and replace it
+# edit the json file, looking for "influx" and replace it
 # with "influx". Grafana's added this in 3.1 and it doesn't
 # seem to work properly.
 #
