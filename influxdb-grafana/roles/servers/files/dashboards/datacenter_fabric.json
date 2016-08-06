@@ -1,4 +1,6 @@
 {
+  "dashboard":
+{
   "__inputs": [
     {
       "name": "DS_INFLUX",
@@ -14,6 +16,12 @@
       "type": "panel",
       "id": "graph",
       "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
       "version": ""
     },
     {
@@ -46,7 +54,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_INFLUX}",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -161,7 +169,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_INFLUX}",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -288,7 +296,7 @@
         {
           "title": "Disk Utilization",
           "error": false,
-          "span": 12,
+          "span": 4,
           "editable": true,
           "type": "graph",
           "isNew": true,
@@ -339,7 +347,7 @@
               "measurement": "disk"
             }
           ],
-          "datasource": "${DS_INFLUX}",
+          "datasource": "influx",
           "renderer": "flot",
           "yaxes": [
             {
@@ -398,6 +406,238 @@
           "aliasColors": {},
           "seriesOverrides": [],
           "links": []
+        },
+        {
+          "title": "NTP Statistics",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "graph",
+          "isNew": true,
+          "id": 5,
+          "targets": [
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$network$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "refid",
+                  "operator": "=~",
+                  "value": "/^$ntp_peer$/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "refid"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "offset"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "A",
+              "measurement": "ntpq"
+            },
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$network$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "refid",
+                  "operator": "=~",
+                  "value": "/^$ntp_peer$/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "refid"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "jitter"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "B",
+              "measurement": "ntpq"
+            }
+          ],
+          "datasource": "influx",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            },
+            {
+              "label": null,
+              "show": true,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true
+          },
+          "grid": {
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 0,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 1,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true,
+            "sort": 0,
+            "msResolution": true
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "links": []
+        },
+        {
+          "title": "Panel Title",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "table",
+          "isNew": true,
+          "id": 6,
+          "targets": [
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "table",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=",
+                  "value": "leaf1"
+                },
+                {
+                  "condition": "AND",
+                  "key": "refid",
+                  "operator": "=~",
+                  "value": "/^$ntp_peer$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "refid",
+                  "operator": "=~",
+                  "value": "/^$ntp_peer$/"
+                }
+              ],
+              "groupBy": [],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "reach"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "A",
+              "measurement": "ntpq",
+              "alias": "",
+              "query": "select last(\"reach\"),\"refid\",\"host\" FROM \"ntpq\" WHERE \"host\" = 'leaf1' AND \"refid\" =~ /^$ntp_peer$/ AND \"refid\" =~ /^$ntp_peer$/",
+              "rawQuery": true
+            }
+          ],
+          "styles": [
+            {
+              "type": "date",
+              "pattern": "Time",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss"
+            },
+            {
+              "unit": "short",
+              "type": "number",
+              "decimals": 2,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "colorMode": null,
+              "pattern": "/.*/",
+              "thresholds": []
+            }
+          ],
+          "transform": "table",
+          "pageSize": null,
+          "showHeader": true,
+          "columns": [],
+          "scroll": true,
+          "fontSize": "100%",
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "links": [],
+          "interval": "",
+          "timeFrom": "20s",
+          "timeShift": null,
+          "hideTimeOverride": true
         }
       ],
       "title": "New row"
@@ -648,7 +888,7 @@
               "alias": "swp1 Avg Notifications Tx"
             }
           ],
-          "datasource": "${DS_INFLUX}",
+          "datasource": "influx",
           "renderer": "flot",
           "yaxes": [
             {
@@ -694,7 +934,7 @@
             "total": false,
             "avg": false
           },
-          "nullPointMode": "connected",
+          "nullPointMode": "null as zero",
           "steppedLine": false,
           "tooltip": {
             "value_type": "cumulative",
@@ -712,7 +952,7 @@
     }
   ],
   "time": {
-    "from": "now-24h",
+    "from": "now-2h",
     "to": "now"
   },
   "timepicker": {
@@ -744,7 +984,7 @@
     "list": [
       {
         "current": {},
-        "datasource": "${DS_INFLUX}",
+        "datasource": "influx",
         "hide": 2,
         "includeAll": false,
         "multi": true,
@@ -757,7 +997,7 @@
       },
       {
         "current": {},
-        "datasource": "${DS_INFLUX}",
+        "datasource": "influx",
         "hide": 2,
         "includeAll": false,
         "multi": true,
@@ -769,7 +1009,7 @@
       },
       {
         "current": {},
-        "datasource": "${DS_INFLUX}",
+        "datasource": "influx",
         "hide": 0,
         "includeAll": false,
         "multi": true,
@@ -781,7 +1021,7 @@
       },
       {
         "current": {},
-        "datasource": "${DS_INFLUX}",
+        "datasource": "influx",
         "hide": 0,
         "includeAll": false,
         "multi": true,
@@ -791,6 +1031,19 @@
         "refresh": 1,
         "regex": "",
         "type": "query"
+      },
+      {
+        "type": "query",
+        "datasource": "influx",
+        "refresh": 1,
+        "name": "ntp_peer",
+        "hide": 2,
+        "options": [],
+        "includeAll": false,
+        "multi": true,
+        "regex": "",
+        "query": "show tag values from ntpq with key = \"refid\"",
+        "current": {}
       }
     ]
   },
@@ -799,7 +1052,8 @@
   },
   "refresh": "5s",
   "schemaVersion": 12,
-  "version": 5,
+  "version": 7,
   "links": [],
   "gnetId": null
+}
 }
