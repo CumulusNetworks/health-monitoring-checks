@@ -37,13 +37,13 @@ def bgp_neighbor_information():
 
     # if bgp is not configured no output is returned
     if len(neighbor_sum_output) == 0:
-        print "No neighbor output. Is BGP configured?"
+        print("No neighbor output. Is BGP configured?")
         exit(3)
 
-    json_neighbor_sum = ujson.loads(neighbor_sum_output)
+    json_neighbor_sum = ujson.loads(neighbor_sum_output.decode('utf-8'))
 
     if len(json_neighbor_sum["peers"]) == 0:
-        print "No BGP peers found. Are any BGP peers configured?"
+        print("No BGP peers found. Are any BGP peers configured?")
         exit(3)
 
     # BGP is configured and peers exist.
@@ -54,20 +54,23 @@ def bgp_neighbor_information():
             [sudo, vtysh, "-c", 'show ip bgp neighbor ' + peer + ' json'])
 
         if len(peer_output) == 0:
-            print "No neighbor output for peer" + peer + "."
+            print("No neighbor output for peer" + peer + ".")
             exit(3)
 
-        peer_output_json = ujson.loads(peer_output)
+        peer_output_json = ujson.loads(peer_output.decode('utf-8'))
 
         if peer not in peer_output_json:
-            print "Provided peer " + peer + " not found."
+            print("Provided peer " + peer + " not found.")
             exit(3)
 
         for stat, value in peer_output_json[peer]["messageStats"].items():
             # bgpstat,host=leaf1,peer=swp2 totalSent=6520
-            print "bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat.encode('ascii') + "=" + str(value)
+            # print("bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat.encode('ascii') + "=" + str(value))
+            print("bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat + "=" + str(value))
 
 
 if __name__ == "__main__":
+
     bgp_neighbor_information()
+
     exit(0)
