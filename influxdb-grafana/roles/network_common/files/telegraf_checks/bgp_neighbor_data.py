@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2.7
 
 # Note: You can't run this in the same folder (network_common/files) as ujson.so.
 # Python will try to load the .so and it will fail since it was built for CL
