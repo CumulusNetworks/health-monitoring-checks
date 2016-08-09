@@ -34,6 +34,9 @@
     append: yes
     groups: adm
 
+# Note: This will create a memory leak before 3.1.0
+# See CM-11435 for details.
+# Restart quagga to recover memory
 - name: Copy BGP Neighbor Check
   copy:
     src: telegraf_checks/bgp_neighbor_data.py
