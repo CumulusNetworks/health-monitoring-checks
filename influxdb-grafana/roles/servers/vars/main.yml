@@ -34,4 +34,5 @@ bgp:
     tor_ports: ["enp0s8", "enp0s9"]
 
 grafana:
-  api_key: "eyJrIjoiN0VlYm84Z29HMm4wQzRkT0cybklOYXRkYTRyYjdkWDAiLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
+  # yamllint disable-line
+  api_key: "eyJrIjoib1oxOXpPZG5pU3JQdXpOQ2hkTWwwWk82NnYyRUM1bmYiLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
