@@ -7,6 +7,11 @@
   apt: name=lldpd state=present
   notify: start lldp
 
+- name: Copy LLDP Settings File
+  copy:
+    src: lldp.d.README.conf
+    dest: /etc/lldp.d/README.conf
+
 # Netshow simplifies network troubleshooting
 - name: Install Netshow
   pip: name=netshow-linux-lib
