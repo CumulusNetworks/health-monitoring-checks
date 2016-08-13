@@ -1,10 +1,14 @@
 ---
 - name: Copy /etc/network/interfaces
-  template: src=interfaces.j2 dest=/etc/network/interfaces
+  template:
+    src: interfaces.j2
+    dest: /etc/network/interfaces
   notify: reload networking
 
 - name: Copy Quagga Configuration
-  template: src=Quagga.conf.j2 dest=/etc/quagga/Quagga.conf
+  template:
+    src: Quagga.conf.j2
+    dest: /etc/quagga/Quagga.conf
   notify: reload quagga
 
 - name: Copy telegraf configuration
