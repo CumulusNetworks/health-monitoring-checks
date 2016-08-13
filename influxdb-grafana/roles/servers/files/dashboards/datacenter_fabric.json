@@ -418,14 +418,14 @@
           "id": 5,
           "isNew": true,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": true,
             "max": false,
             "min": false,
             "show": false,
             "total": false,
-            "values": true,
-            "alignAsTable": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -441,42 +441,42 @@
           "steppedLine": false,
           "targets": [
             {
-              "policy": "default",
               "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "remote"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "host"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "measurement": "ntpq",
+              "policy": "default",
+              "refId": "A",
               "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "reach"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
               "tags": [
                 {
                   "key": "host",
                   "operator": "=~",
                   "value": "/^$network$/"
                 }
-              ],
-              "groupBy": [
-                {
-                  "type": "tag",
-                  "params": [
-                    "remote"
-                  ]
-                },
-                {
-                  "type": "tag",
-                  "params": [
-                    "host"
-                  ]
-                }
-              ],
-              "select": [
-                [
-                  {
-                    "type": "field",
-                    "params": [
-                      "reach"
-                    ]
-                  }
-                ]
-              ],
-              "refId": "A",
-              "measurement": "ntpq"
+              ]
             }
           ],
           "timeFrom": null,
@@ -826,13 +826,383 @@
       "collapse": false,
       "editable": true,
       "height": "250px",
-      "panels": [],
+      "panels": [
+        {
+          "title": "Leaf Bandwidth Utilization",
+          "error": false,
+          "span": 6,
+          "editable": true,
+          "type": "graph",
+          "isNew": true,
+          "id": 6,
+          "targets": [
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$leafs$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "interface",
+                  "operator": "=~",
+                  "value": "/^$interfaces$/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "interface"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "bytes_sent"
+                    ]
+                  },
+                  {
+                    "type": "derivative",
+                    "params": [
+                      "1s"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "A",
+              "measurement": "net",
+              "query": "SELECT derivative(\"bytes_sent\", 1s) FROM \"net\" WHERE \"host\" = 'leaf1' AND \"interface\" =~ /^$interfaces$/",
+              "rawQuery": false,
+              "alias": "Tx $tag_host:$tag_interface",
+              "hide": false
+            },
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$leafs$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "interface",
+                  "operator": "=~",
+                  "value": "/^$interfaces$/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "interface"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "bytes_recv"
+                    ]
+                  },
+                  {
+                    "type": "derivative",
+                    "params": [
+                      "1s"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "B",
+              "measurement": "net",
+              "query": "SELECT derivative(\"bytes_recv\", 1s) FROM \"net\" WHERE \"host\" =~ /^$leafs$/ AND \"interface\" =~ /^$interfaces$/ AND $timeFilter GROUP BY \"host\", \"interface\"",
+              "rawQuery": true,
+              "alias": "Rx $tag_host:$tag_interface",
+              "hide": false
+            }
+          ],
+          "datasource": "influx",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": "",
+              "show": false,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "bps"
+            },
+            {
+              "label": null,
+              "show": false,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true
+          },
+          "grid": {
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true,
+            "sort": 0,
+            "msResolution": true
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [
+            {
+              "alias": "/^Rx*/",
+              "transform": "negative-Y"
+            }
+          ],
+          "links": [],
+          "repeat": null
+        },
+        {
+          "title": "Spine Bandwidth Utilization",
+          "error": false,
+          "span": 6,
+          "editable": true,
+          "type": "graph",
+          "isNew": true,
+          "id": 8,
+          "targets": [
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$spines$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "interface",
+                  "operator": "=~",
+                  "value": "/^$interfaces$/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "interface"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "bytes_sent"
+                    ]
+                  },
+                  {
+                    "type": "derivative",
+                    "params": [
+                      "1s"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "A",
+              "measurement": "net",
+              "query": "SELECT derivative(\"bytes_sent\", 1s) FROM \"net\" WHERE \"host\" = 'leaf1' AND \"interface\" =~ /^$interfaces$/",
+              "rawQuery": false,
+              "alias": "Tx $tag_host:$tag_interface",
+              "hide": false
+            },
+            {
+              "policy": "default",
+              "dsType": "influxdb",
+              "resultFormat": "time_series",
+              "tags": [
+                {
+                  "key": "host",
+                  "operator": "=~",
+                  "value": "/^$spines$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "interface",
+                  "operator": "=~",
+                  "value": "/^$interfaces$/"
+                }
+              ],
+              "groupBy": [
+                {
+                  "type": "tag",
+                  "params": [
+                    "host"
+                  ]
+                },
+                {
+                  "type": "tag",
+                  "params": [
+                    "interface"
+                  ]
+                }
+              ],
+              "select": [
+                [
+                  {
+                    "type": "field",
+                    "params": [
+                      "bytes_recv"
+                    ]
+                  },
+                  {
+                    "type": "derivative",
+                    "params": [
+                      "1s"
+                    ]
+                  }
+                ]
+              ],
+              "refId": "B",
+              "measurement": "net",
+              "query": "SELECT derivative(\"bytes_recv\", 1s) FROM \"net\" WHERE \"host\" =~ /^$leafs$/ AND \"interface\" =~ /^$interfaces$/ AND $timeFilter GROUP BY \"host\", \"interface\"",
+              "rawQuery": false,
+              "alias": "Rx $tag_host:$tag_interface",
+              "hide": false
+            }
+          ],
+          "datasource": "influx",
+          "renderer": "flot",
+          "yaxes": [
+            {
+              "label": null,
+              "show": false,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "bps"
+            },
+            {
+              "label": null,
+              "show": false,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "format": "short"
+            }
+          ],
+          "xaxis": {
+            "show": true
+          },
+          "grid": {
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true,
+            "sort": 0,
+            "msResolution": true
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "aliasColors": {},
+          "seriesOverrides": [
+            {
+              "alias": "/^Rx*/",
+              "transform": "negative-Y"
+            }
+          ],
+          "links": []
+        }
+      ],
       "title": "New row"
     }
   ],
   "time": {
-    "from": "2016-08-06T20:04:18.114Z",
-    "to": "2016-08-06T20:16:26.569Z"
+    "from": "now-3h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
