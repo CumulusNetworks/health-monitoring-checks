@@ -23,3 +23,8 @@
     name: telegraf
     state: restarted
     enabled: yes
+
+- name: restart ptm
+  service:
+    name: ptmd
+    state: reloaded

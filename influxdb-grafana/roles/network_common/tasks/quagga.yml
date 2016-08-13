@@ -5,6 +5,12 @@
     regexp: "#precedence ::ffff:0:0/96  10"
     replace: "precedence ::ffff:0:0/96  100"
 
+- name: Copy PTM Topology File
+  copy:
+    src: topology.dot
+    dest: /etc/ptm.d/
+  notify: restart ptm
+
 - name: Copy Quagga daemons file
   copy:
     src: daemons
