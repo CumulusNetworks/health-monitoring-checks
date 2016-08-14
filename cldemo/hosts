@@ -1,0 +1,13 @@
+[leafs]
+leaf01
+leaf03
+
+[spines]
+spine01
+
+[servers]
+server01
+server03
+
+[mgmt]
+oob-mgmt-server
