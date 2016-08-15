@@ -575,7 +575,7 @@
               ],
               "hide": false,
               "policy": "default",
-              "query": "SELECT derivative(\"keepalivesRecv\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf1' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
+              "query": "SELECT derivative(\"keepalivesRecv\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf01' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -614,7 +614,7 @@
               ],
               "hide": false,
               "policy": "default",
-              "query": "SELECT derivative(\"keepalivesSent\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf1' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
+              "query": "SELECT derivative(\"keepalivesSent\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf01' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
               "rawQuery": true,
               "refId": "B",
               "resultFormat": "time_series",
@@ -652,7 +652,7 @@
                 }
               ],
               "policy": "default",
-              "query": "SELECT derivative(\"updatesRecv\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf1' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
+              "query": "SELECT derivative(\"updatesRecv\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf01' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
               "rawQuery": true,
               "refId": "D",
               "resultFormat": "time_series",
@@ -690,7 +690,7 @@
                 }
               ],
               "policy": "default",
-              "query": "SELECT derivative(\"updatesSent\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf1' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
+              "query": "SELECT derivative(\"updatesSent\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf01' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
               "rawQuery": true,
               "refId": "E",
               "resultFormat": "time_series",
@@ -728,7 +728,7 @@
                 }
               ],
               "policy": "default",
-              "query": "SELECT derivative(\"notificationsRecv\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf1' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
+              "query": "SELECT derivative(\"notificationsRecv\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf01' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
               "rawQuery": true,
               "refId": "F",
               "resultFormat": "time_series",
@@ -766,7 +766,7 @@
                 }
               ],
               "policy": "default",
-              "query": "SELECT derivative(\"notificationsSent\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf1' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
+              "query": "SELECT derivative(\"notificationsSent\", 1s) FROM \"bgpstat\" WHERE \"host\" = 'leaf01' AND \"peer\" = 'swp1' AND $timeFilter GROUP BY \"host\"",
               "rawQuery": true,
               "refId": "C",
               "resultFormat": "time_series",
@@ -789,7 +789,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Leaf 1 swp1 Peer Stats",
+          "title": "Leaf01 swp51 Peer Stats",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -885,7 +885,7 @@
               ],
               "refId": "A",
               "measurement": "net",
-              "query": "SELECT derivative(\"bytes_sent\", 1s) FROM \"net\" WHERE \"host\" = 'leaf1' AND \"interface\" =~ /^$interfaces$/",
+              "query": "SELECT derivative(\"bytes_sent\", 1s) FROM \"net\" WHERE \"host\" = 'leaf01' AND \"interface\" =~ /^$interfaces$/",
               "rawQuery": false,
               "alias": "Tx $tag_host:$tag_interface",
               "hide": false
@@ -1070,7 +1070,7 @@
               ],
               "refId": "A",
               "measurement": "net",
-              "query": "SELECT derivative(\"bytes_sent\", 1s) FROM \"net\" WHERE \"host\" = 'leaf1' AND \"interface\" =~ /^$interfaces$/",
+              "query": "SELECT derivative(\"bytes_sent\", 1s) FROM \"net\" WHERE \"host\" = 'leaf01' AND \"interface\" =~ /^$interfaces$/",
               "rawQuery": false,
               "alias": "Tx $tag_host:$tag_interface",
               "hide": false
