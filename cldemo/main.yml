@@ -40,7 +40,6 @@
   become: yes
   roles:
     - monitoring_agent
-    - spines
   handlers:
     - include: handlers/main.yml
       static: yes
@@ -49,7 +48,6 @@
   become: yes
   roles:
     - monitoring_agent
-    - leafs
   handlers:
     - include: handlers/main.yml
       static: yes
