@@ -39,7 +39,7 @@
 - hosts: spines
   become: yes
   roles:
-    - network_common
+    - monitoring_agent
     - spines
   handlers:
     - include: handlers/main.yml
@@ -48,7 +48,7 @@
 - hosts: leafs
   become: yes
   roles:
-    - network_common
+    - monitoring_agent
     - leafs
   handlers:
     - include: handlers/main.yml
