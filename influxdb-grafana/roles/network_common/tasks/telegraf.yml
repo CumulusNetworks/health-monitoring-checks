@@ -37,15 +37,15 @@
 # Note: This will create a memory leak before 3.1.0
 # See CM-11435 for details.
 # Restart quagga to recover memory
-- name: Copy BGP Neighbor Check
-  copy:
-    src: telegraf_checks/bgp_neighbor_data.py
-    dest: /etc/telegraf/checks/
+# - name: Copy BGP Neighbor Check
+#   copy:
+#     src: telegraf_checks/bgp_neighbor_data.py
+#     dest: /etc/telegraf/checks/
 
-- name: Install ujson binary
-  copy:
-    src: ujson.so
-    dest: /usr/local/lib/python2.7/dist-packages/
+# - name: Install ujson binary
+#   copy:
+#     src: ujson.so
+#     dest: /usr/local/lib/python2.7/dist-packages/
 
 # If copying the files for ujson library doesn't work
 # here's how to build it manually.
