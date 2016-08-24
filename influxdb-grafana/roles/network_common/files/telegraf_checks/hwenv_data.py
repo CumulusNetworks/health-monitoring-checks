@@ -26,6 +26,5 @@ parsed_output=json.loads(output)
 
 for item in parsed_output:
     print 'hwenv_state,host=%s,device=%s state="%s"' %(hostname,item['name'],item['state'])
-    # print 'hwenv_state,host=%s,device=%s speed="%s"' %(hostname,item,parsed_output[item]['speed'])
-    # print item;
+    print 'hwenv_state,host=%s,device=%s input="%s"' %(hostname,item['name'],item['input'])
 exit(0)
