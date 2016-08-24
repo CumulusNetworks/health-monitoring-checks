@@ -26,6 +26,9 @@ parsed_output=json.loads(output)
 
 for item in parsed_output:
     print 'hwenv_state,host=%s,device=%s state="%s"' %(hostname,item['name'],item['state'])
-    if item['input'] != None:
+    try:
+        item['input']
+    except:
+    else:
         print 'hwenv_state,host=%s,device=%s input="%s"' %(hostname,item['name'],item['input'])
 exit(0)
