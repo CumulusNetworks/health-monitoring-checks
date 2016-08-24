@@ -27,5 +27,8 @@ if sys.argv[1] == "interface_state":
         print 'iface_state,host=%s,interface=%s speed="%s"' %(hostname,item,parsed_output[item]['speed'])
 elif sys.argv[1] == "interface_stats":
     for item in parsed_output:
-        print 'iface_stats,host=%s,interface=%s RX_OK="%s"' %(hostname,item,parsed_output[item]['RX_OK'])
+        print 'iface_stats,host=%s,interface=%s PKT_RX_OK="%s"' %(hostname,item,parsed_output[item]['PKT_RX_OK'])
+        print 'iface_stats,host=%s,interface=%s PKT_TX_OK="%s"' %(hostname,item,parsed_output[item]['PKT_TX_OK'])
+        print 'iface_stats,host=%s,interface=%s PKT_RX_DRP="%s"' %(hostname,item,parsed_output[item]['PKT_RX_DRP'])
+        print 'iface_stats,host=%s,interface=%s PKT_TX_DRP="%s"' %(hostname,item,parsed_output[item]['PKT_TX_DRP'])
 exit(0)
