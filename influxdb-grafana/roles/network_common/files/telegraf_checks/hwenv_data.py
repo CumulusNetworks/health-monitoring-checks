@@ -25,7 +25,7 @@ hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
 parsed_output=json.loads(output)
 
 for item in parsed_output:
-    # print 'hwenv_state,host=%s,interface=%s state="%s"' %(hostname,item,parsed_output[item]['linkstate'])
-    # print 'hwenv_state,host=%s,interface=%s speed="%s"' %(hostname,item,parsed_output[item]['speed'])
-    print item;
+    print 'hwenv_state,host=%s,device=%s state="%s"' %(hostname,item['name'],item['state'])
+    # print 'hwenv_state,host=%s,device=%s speed="%s"' %(hostname,item,parsed_output[item]['speed'])
+    # print item;
 exit(0)
