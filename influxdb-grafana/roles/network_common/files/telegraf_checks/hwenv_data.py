@@ -4,10 +4,10 @@ import sys
 import json
 import subprocess
 #Parse Args
-if len(sys.argv)!=2:
-    print "ERROR: Need a single argument."
-    print "   Usage: %s interface_state" % sys.argv[0]
-    exit(1)
+# if len(sys.argv)!=2:
+#     print "ERROR: Need a single argument."
+#     print "   Usage: %s interface_state" % sys.argv[0]
+#     exit(1)
 #Collect Output
 output=None
 
