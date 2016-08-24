@@ -13,7 +13,7 @@ output=None
 if sys.argv[1] == "interface_state":
     output=subprocess.check_output(['/usr/bin/netshow interface all -j'],shell=True)
 elif sys.argv[1] == "interface_stats":
-    output=subprocess.check_output(['/usr/bin/cl-netstat -j'],shell=True)
+    output=subprocess.check_output(['/usr/cumulus/bin/cl-netstat -j'],shell=True)
 else:
     print "   Usage: %s interface_state" % sys.argv[0]
     exit(1)
