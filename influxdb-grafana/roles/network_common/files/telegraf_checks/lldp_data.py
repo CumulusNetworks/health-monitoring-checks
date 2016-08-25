@@ -11,7 +11,7 @@ import subprocess
 #Collect Output
 output=None
 
-output=subprocess.check_output(['/usr/sbin/smonctl -j'],shell=True)
+output=subprocess.check_output(['/usr/sbin/lldpctl -f json'],shell=True)
 
 # if sys.argv[1] == "fan":
 #     output=subprocess.check_output(['/usr/bin/netshow interface all -j'],shell=True)
@@ -24,9 +24,8 @@ hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
 #Parse and Display Output
 parsed_output=json.loads(output)
 
-for item in parsed_output:
-    print 'hwenv_state,host=%s,device=%s state="%s"' %(hostname,item['name'],item['state'])
+print len(parsed_output['lldp']['interface'])
 
-    if 'input' in item:
-        print 'hwenv_state,host=%s,device=%s input="%s"' %(hostname,item['name'],item['input'])
+for item in parsed_output:
+
 exit(0)
