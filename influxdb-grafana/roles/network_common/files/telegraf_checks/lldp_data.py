@@ -24,8 +24,8 @@ hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
 #Parse and Display Output
 parsed_output=json.loads(output)
 
-print len(parsed_output['lldp']['interface'])
+print len(parsed_output['lldp'][0]['interface'])
 
-for item in parsed_output:
+# for item in parsed_output:
 
 exit(0)
