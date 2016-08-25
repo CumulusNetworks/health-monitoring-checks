@@ -11,7 +11,7 @@ import subprocess
 #Collect Output
 output=None
 
-output=subprocess.check_output(['/usr/sbin/lldpctl -f json'],shell=True)
+output=subprocess.check_output(['sudo /usr/sbin/lldpctl -f json'],shell=True)
 
 # if sys.argv[1] == "fan":
 #     output=subprocess.check_output(['/usr/bin/netshow interface all -j'],shell=True)
