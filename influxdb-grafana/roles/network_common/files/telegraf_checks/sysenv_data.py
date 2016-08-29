@@ -4,12 +4,14 @@ import psutil
 import sys
 import json
 import subprocess
-#Parse Args
-# if len(sys.argv)!=2:
-#     print "ERROR: Need a single argument."
-#     print "   Usage: %s interface_state" % sys.argv[0]
-#     exit(1)
-#Collect Output
+Parse Args
+ if len(sys.argv)!=2:
+     print "ERROR: Need a single argument."
+     print "   Usage: %s interface_state" % sys.argv[0]
+     exit(1)
+
+#This module uses the psutil library to pull cpu, memory, disk.
+# Collect Output
 output=None
 
 hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
