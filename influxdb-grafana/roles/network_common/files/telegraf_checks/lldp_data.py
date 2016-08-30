@@ -1,31 +1,27 @@
 #!/usr/bin/python
-#python parser
-import sys
+
 import json
 import subprocess
-#Parse Args
-# if len(sys.argv)!=2:
-#     print "ERROR: Need a single argument."
-#     print "   Usage: %s interface_state" % sys.argv[0]
-#     exit(1)
-#Collect Output
-output=None
+from output_module import ExportData
 
-output=subprocess.check_output(['sudo /usr/sbin/lldpctl -f json'],shell=True)
+"""
+Collects LLDP Neighbor count.
+"""
 
-# if sys.argv[1] == "fan":
-#     output=subprocess.check_output(['/usr/bin/netshow interface all -j'],shell=True)
-# elif sys.argv[1] == "memory":
-#     output=subprocess.check_output(['/usr/cumulus/bin/cl-netstat -j'],shell=True)
-# else:
-#     print "   Usage: %s interface_state" % sys.argv[0]
-#     exit(1)
-hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
-#Parse and Display Output
-parsed_output=json.loads(output)
+def collect_data():
+    output=None
+    output=subprocess.check_output(['sudo /usr/sbin/lldpctl -f json'],shell=True)
+    
+    parsed_output=json.loads(output)
+    #data = ExportData(data_set_name,fixed_tags,data)
+    data = ExportData("lldp_state",{},{"neighbors":len(parsed_output['lldp'][0]['interface'])})
 
-print 'lldp_state,host=%s neighbors="%s"' %(hostname,len(parsed_output['lldp'][0]['interface']))
+    #Use this to sanity check the datastructure
+    #data.show_data()
 
-# for item in parsed_output:
+    #Send the data
+    data.send_data("cli")
+
+collect_data()
 
 exit(0)

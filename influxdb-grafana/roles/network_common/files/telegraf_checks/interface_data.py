@@ -1,34 +1,41 @@
 #!/usr/bin/python
-#python parser
-import sys
+
 import json
 import subprocess
-#Parse Args
-if len(sys.argv)!=2:
-    print "ERROR: Need a single argument."
-    print "   Usage: %s interface_state" % sys.argv[0]
-    exit(1)
-#Collect Output
-output=None
-if sys.argv[1] == "interface_state":
-    output=subprocess.check_output(['/usr/bin/netshow interface all -j'],shell=True)
-elif sys.argv[1] == "interface_stats":
-    output=subprocess.check_output(['/usr/cumulus/bin/cl-netstat -j'],shell=True)
-else:
-    print "   Usage: %s interface_state" % sys.argv[0]
-    exit(1)
-hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
-#Parse and Display Output
-parsed_output=json.loads(output)
+from output_module import ExportData
 
-if sys.argv[1] == "interface_state":
+"""
+Collects all interface info.
+"""
+
+def collect_data():
+    output=None
+    output=subprocess.check_output(['/usr/cumulus/bin/cl-netstat -j'],shell=True)
+    parsed_output=json.loads(output)
+    #data = ExportData(data_set_name,fixed_tags,data)
+    data = ExportData("iface_info",{})
+
     for item in parsed_output:
-        print 'iface_state,host=%s,interface=%s state="%s"' %(hostname,item,parsed_output[item]['linkstate'])
-        print 'iface_state,host=%s,interface=%s speed="%s"' %(hostname,item,parsed_output[item]['speed'])
-elif sys.argv[1] == "interface_stats":
+        #data.add_row({tag_name:tag_value,datapoint_name:datapoint_value}
+        data.add_row({"interface":item,"RX_OK":parsed_output[item]['RX_OK']})
+        data.add_row({"interface":item,"TX_OK":parsed_output[item]['TX_OK']})
+        data.add_row({"interface":item,"RX_DRP":parsed_output[item]['RX_DRP']})
+        data.add_row({"interface":item,"TX_DRP":parsed_output[item]['TX_DRP']})
+
+    output=subprocess.check_output(['/usr/bin/netshow interface all -j'],shell=True)
+    parsed_output=json.loads(output)
+
     for item in parsed_output:
-        print 'iface_stats,host=%s,interface=%s PKT_RX_OK="%s"' %(hostname,item,parsed_output[item]['PKT_RX_OK'])
-        print 'iface_stats,host=%s,interface=%s PKT_TX_OK="%s"' %(hostname,item,parsed_output[item]['PKT_TX_OK'])
-        print 'iface_stats,host=%s,interface=%s PKT_RX_DRP="%s"' %(hostname,item,parsed_output[item]['PKT_RX_DRP'])
-        print 'iface_stats,host=%s,interface=%s PKT_TX_DRP="%s"' %(hostname,item,parsed_output[item]['PKT_TX_DRP'])
+        #data.add_row({tag_name:tag_value,datapoint_name:datapoint_value}
+        data.add_row({"interface":item,"linkstate":parsed_output[item]['linkstate']})
+        data.add_row({"interface":item,"speed":parsed_output[item]['speed']})
+
+    #Use this to sanity check the datastructure
+    #data.show_data()
+
+    #Send the data
+    data.send_data("cli")
+
+collect_data()
+
 exit(0)
