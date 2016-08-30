@@ -3,12 +3,7 @@ import psutil
 import sys
 import json
 import subprocess
-<<<<<<< HEAD
-# Parse Args
-if len(sys.argv)!=2:
-    print "ERROR: Need a single argument."
-    print "   Usage: %s cpu|memory|disk" % sys.argv[0]
-    exit(1)
+from output_module import ExportData
 
 #This module uses the psutil library to pull cpu, memory, disk.
 # Collect Output
@@ -16,25 +11,11 @@ output=None
 
 hostname=subprocess.check_output(['/bin/hostname'],shell=True).replace("\n","")
 
-if sys.argv[1] == "cpu":
-    output=psutil.cpu_percent(interval=None, percpu=True)
-    print 'systemenv,host=%s,device=cpu cpu=%s' %(hostname,output)
-elif sys.argv[1] == "memory":
-    output=psutil.virtual_memory()
-    print 'systemenv,host=%s,device=memused percent_used=%s' %(hostname,output.percent)
-elif sys.argv[1] == "disk":
-    output=psutil.disk_usage('/')
-    print 'systemenv,host=%s,device=diskused percent_used=%s' %(hostname,output.percent)
-else:
-=======
-from output_module import ExportData
-
 """
 This module uses the psutil library to pull cpu, memory, disk.
 """
 
 def usage():
->>>>>>> f7b4433ddb8182b9809a0a917cc2e705093d5d39
     print "   Usage: %s cpu|memory|disk" % sys.argv[0]
     exit(1)
 
