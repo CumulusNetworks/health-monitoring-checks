@@ -37,9 +37,9 @@ class ExportData(object):
         output+= "   Sanity checking:\n"
         output+= "######################\n"
         output+= "<data set name is: %s >\n" % self.data_set_name
-        output+= "    data has fixed tags: \n        " 
+        output+= "    data has fixed tags: \n        "
         output+= "%s \n" % (self.__fixed_tags())
-        output+= "    data is: \n        " 
+        output+= "    data is: \n        "
         for data_element in self.data:
             for data_column in data_element:
                 output += "%s=%s, " %(data_column,data_element[data_column])
@@ -75,6 +75,6 @@ class ExportData(object):
         for data_element in self.data:
             data = ""
             for data_column in data_element:
-                data += " %s=%s" % (data_column,data_element[data_column])
-            output += "%s,%s%s\n" % (self.data_set_name,self.__fixed_tags(),data)            
+                data += "%s=%s" % (data_column,data_element[data_column])
+            output += "%s,%s%s\n" % (self.data_set_name,self.__fixed_tags(),data)
         return output
