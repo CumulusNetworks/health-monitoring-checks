@@ -1,6 +1,5 @@
 {
   "dashboard":
-
 {
   "__inputs": [
     {
@@ -33,7 +32,7 @@
     }
   ],
   "id": null,
-  "title": "Datacenter Fabric",
+  "title": "Datacenter Fabric2",
   "tags": [],
   "style": "dark",
   "timezone": "browser",

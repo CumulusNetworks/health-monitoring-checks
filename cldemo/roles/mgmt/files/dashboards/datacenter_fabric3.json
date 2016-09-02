@@ -1,4 +1,6 @@
 {
+  "dashboard":
+{
   "__inputs": [
     {
       "name": "DS_INFLUX",
@@ -30,7 +32,7 @@
     }
   ],
   "id": null,
-  "title": "Datacenter Fabric",
+  "title": "Datacenter Fabric3",
   "tags": [],
   "style": "dark",
   "timezone": "browser",
@@ -1662,4 +1664,5 @@
   "version": 5,
   "links": [],
   "gnetId": null
+}
 }
