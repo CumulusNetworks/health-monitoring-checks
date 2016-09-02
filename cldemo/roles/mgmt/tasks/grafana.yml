@@ -104,7 +104,7 @@
     # For dashboards build before Grafana 3.1, change this to
     # body_format: raw
     body_format: json
-    HEADER_Authorization: "Bearer {{ grafana.api_key}}"
+    HEADER_Authorization: "Bearer {{ grafana.api_key }}"
     HEADER_Content-Type: "application/json"
     body: "{{ lookup('file', 'dashboards/datacenter_fabric.json') }}"
   ignore_errors: yes
@@ -116,7 +116,7 @@
     # For dashboards build before Grafana 3.1, change this to
     # body_format: raw
     body_format: json
-    HEADER_Authorization: "Bearer {{ grafana.api_key}}"
+    HEADER_Authorization: "Bearer {{ grafana.api_key }}"
     HEADER_Content-Type: "application/json"
     body: "{{ lookup('file', 'dashboards/datacenter_fabric2.json') }}"
   ignore_errors: yes
@@ -128,7 +128,7 @@
     # For dashboards build before Grafana 3.1, change this to
     # body_format: raw
     body_format: json
-    HEADER_Authorization: "Bearer {{ grafana.api_key}}"
+    HEADER_Authorization: "Bearer {{ grafana.api_key }}"
     HEADER_Content-Type: "application/json"
     body: "{{ lookup('file', 'dashboards/datacenter_fabric3.json') }}"
   ignore_errors: yes
