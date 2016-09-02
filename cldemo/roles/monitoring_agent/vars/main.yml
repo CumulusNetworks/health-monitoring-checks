@@ -43,3 +43,10 @@ telegraf:
     database_ip: "192.168.0.254"
     username: "admin"
     password: "admin"
+scripts:
+  - "bgp_neighbor_data.py"
+  - "hwenv_data.py"
+  - "interface_data.py"
+  - "lldp_data.py"
+  - "output_module.py"
+  - "sysenv_data.py"

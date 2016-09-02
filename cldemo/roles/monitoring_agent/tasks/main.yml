@@ -37,17 +37,15 @@
 # Note: This will create a memory leak before 3.1.0
 # See CM-11435 for details.
 # Restart quagga to recover memory
-- name: Copy BGP Neighbor Check
-  copy:
-    src: telegraf_checks/{{ item }}
-    dest: /etc/telegraf/checks/
-    with_items:
-      - "bgp_neighbor_data.py"
-      - "hwenv_data.py"
-      - "interface_data.py"
-      - "lldp_data.py"
-      - "output_module.py"
-      - "sysenv_data.py"
+- name: Copy scripts for checks
+  copy: src=telegraf_checks/{{ item.script }} dest=/etc/telegraf/checks/
+  with_items:
+    - { script: "bgp_neighbor_data.py" }
+    - { script: "hwenv_data.py" }
+    - { script: "interface_data.py" }
+    - { script: "lldp_data.py" }
+    - { script: "output_module.py" }
+    - { script: "sysenv_data.py" }
 
 - name: Install ujson binary
   copy:
