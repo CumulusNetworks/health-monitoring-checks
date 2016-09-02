@@ -75,6 +75,6 @@ class ExportData(object):
         for data_element in self.data:
             data = ""
             for data_column in data_element:
-                data += "%s=%s" % (data_column,data_element[data_column])
+                data += " %s=%s" % (data_column,data_element[data_column])
             output += "%s,%s%s\n" % (self.data_set_name,self.__fixed_tags(),data)
         return output
