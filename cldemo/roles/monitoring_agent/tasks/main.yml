@@ -39,8 +39,15 @@
 # Restart quagga to recover memory
 - name: Copy BGP Neighbor Check
   copy:
-    src: telegraf_checks/bgp_neighbor_data.py
+    src: telegraf_checks/{{ item }}
     dest: /etc/telegraf/checks/
+    with_items:
+      - bgp_neighbor_data.py
+      - hwenv_data.py
+      - interface_data.py
+      - lldp_data.py
+      - output_module.py
+      - sysenv_data.py
 
 - name: Install ujson binary
   copy:
