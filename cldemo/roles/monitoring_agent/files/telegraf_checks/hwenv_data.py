@@ -17,9 +17,9 @@ def collect_data():
 
     for item in parsed_output:
         #data.add_row({variable_tags},{data})
-        data.add_row({"device":item['name']},{"state":'"'+item['state']+'"')})
+        data.add_row({"device":item['name']},{"state":'"'+item['state']+'"'})
         if 'input' in item:
-            data.add_row({"device":item['name']},{"input":'"'+item['input']+'"')})
+            data.add_row({"device":item['name']},{"input":'"'+item['input']+'"'})
 
     #Use this to sanity check the datastructure
     #data.show_data()
