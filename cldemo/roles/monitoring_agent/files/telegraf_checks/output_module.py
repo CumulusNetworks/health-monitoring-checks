@@ -65,16 +65,20 @@ class ExportData(object):
                 exit(1)
 
     def __fixed_tags(self):
-        fixed_tags=""
+        # fixed_tags=""
+        fixed_tags = []
         for tag in self.fixed_tags:
-            fixed_tags+= "%s=%s," % (tag,self.fixed_tags[tag])
+            # fixed_tags+= "%s=%s," % (tag,self.fixed_tags[tag])
+            fixed_tags.append ("%s=%s," % (tag,self.fixed_tags[tag]))
         return fixed_tags
 
     def __repr__(self):
         output=""
         for data_element in self.data:
-            data = ""
+            # data = ""
+            data = []
             for data_column in data_element:
-                data += " %s=%s" % (data_column,data_element[data_column])
-            output += "%s,%s%s\n" % (self.data_set_name,self.__fixed_tags(),data)
+                # data += " %s=%s" % (data_column,data_element[data_column])
+                data.append("%s=%s" % (data_column,data_element[data_column]))
+            output += "%s,%s %s\n" % (self.data_set_name,', '.join(self.__fixed_tags()),', '.join(data))
         return output
