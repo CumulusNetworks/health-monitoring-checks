@@ -48,7 +48,8 @@ def bgp_neighbor_information():
 
     # BGP is configured and peers exist.
 
-    data = ExportData("bgpstat")        
+    data = ExportData("bgpstat")
+    data.add_row({},{"num_peers":len(json_neighbor_sum["peers"])})
 
     for peer in json_neighbor_sum["peers"].keys():
 

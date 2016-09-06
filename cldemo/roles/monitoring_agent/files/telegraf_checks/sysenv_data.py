@@ -9,6 +9,7 @@ from output_module import ExportData
 # Install required dependencies:
 # sudo apt-get install gcc python-dev python-pip
 # pip install psutil
+# https://github.com/giampaolo/psutil/blob/master/INSTALL.rst
 
 # Collect Output
 output=None
