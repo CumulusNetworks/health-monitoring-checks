@@ -20,24 +20,24 @@ def usage():
     exit(1)
 
 def collect_data():
-    #data = ExportData(data_set_name,fixed_tags,data)
-    data = ExportData("systemenv",{},)
+    #data = ExportData(data_set_name,fixed_tags,variable_tags,data)
+    data = ExportData("systemenv")
 
     output=None
     if sys.argv[1] == "cpu":
         output=psutil.cpu_percent(interval=None, percpu=True)
-        #data.add_row({tag_name:tag_value,datapoint_name:datapoint_value}
-        data.add_row({"device":"cpu","cpu":output[0]})
+        #data.add_row({variable_tags},{data})
+        data.add_row({"device":"cpu"},{"cpu":output[0]})
 
     elif sys.argv[1] == "memory":
         output=psutil.virtual_memory()
-        #data.add_row({tag_name:tag_value,datapoint_name:datapoint_value}
-        data.add_row({"device":"memused","percent_used":output.percent})
+        #data.add_row({variable_tags},{data})
+        data.add_row({"device":"memused"},{"percent_used":output.percent})
 
     elif sys.argv[1] == "disk":
         output=psutil.disk_usage('/')
-        #data.add_row({tag_name:tag_value,datapoint_name:datapoint_value}
-        data.add_row({"device":"diskused","percent_used":output.percent})
+        #data.add_row({variable_tags},{data})
+        data.add_row({"device":"diskused"},{"percent_used":output.percent})
     else:
         usage()
 

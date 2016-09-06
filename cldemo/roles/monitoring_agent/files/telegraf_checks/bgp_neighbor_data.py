@@ -3,9 +3,9 @@
 # Note: You can't run this in the same folder (network_common/files) as ujson.so.
 # Python will try to load the .so and it will fail since it was built for CL
 
+import json
 import subprocess
-import ujson
-import socket
+from output_module import ExportData
 
 sudo = "/usr/bin/sudo"
 vtysh = "/usr/bin/vtysh"
@@ -40,13 +40,15 @@ def bgp_neighbor_information():
         print("No neighbor output. Is BGP configured?")
         exit(3)
 
-    json_neighbor_sum = ujson.loads(neighbor_sum_output.decode('utf-8'))
+    json_neighbor_sum = json.loads(neighbor_sum_output.decode('utf-8'))
 
     if len(json_neighbor_sum["peers"]) == 0:
         print("No BGP peers found. Are any BGP peers configured?")
         exit(3)
 
     # BGP is configured and peers exist.
+
+    data = ExportData("bgpstat")        
 
     for peer in json_neighbor_sum["peers"].keys():
 
@@ -57,20 +59,22 @@ def bgp_neighbor_information():
             print("No neighbor output for peer" + peer + ".")
             exit(3)
 
-        peer_output_json = ujson.loads(peer_output.decode('utf-8'))
+        peer_output_json = json.loads(peer_output.decode('utf-8'))
 
         if peer not in peer_output_json:
             print("Provided peer " + peer + " not found.")
             exit(3)
-
         for stat, value in peer_output_json[peer]["messageStats"].items():
             # bgpstat,host=leaf1,peer=swp2 totalSent=6520
             # print("bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat.encode('ascii') + "=" + str(value))
-            print("bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat + "=" + str(value))
+            data.add_row({"peer":peer},{stat:str(value)})
 
+    #data.show_data()
+    data.send_data("cli")
 
 if __name__ == "__main__":
 
     bgp_neighbor_information()
 
     exit(0)
+

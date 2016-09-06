@@ -13,8 +13,8 @@ def collect_data():
     output=subprocess.check_output(['sudo /usr/sbin/lldpctl -f json'],shell=True)
     
     parsed_output=json.loads(output)
-    #data = ExportData(data_set_name,fixed_tags,data)
-    data = ExportData("lldp_state",{},{"neighbors":len(parsed_output['lldp'][0]['interface'])})
+    #data = ExportData(data_set_name,fixed_tags,variable_tags,data)
+    data = ExportData("lldp_state",data={"neighbors":len(parsed_output['lldp'][0]['interface'])})
 
     #Use this to sanity check the datastructure
     #data.show_data()
