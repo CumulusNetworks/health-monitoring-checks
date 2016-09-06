@@ -100,7 +100,7 @@ class ExportData(object):
             variable_tags_string+= ",%s=%s" % (tag,self.variable_tags[index][tag])
         if variable_tags_string == "":
             return ""
-        return variable_tags_string[1:]
+        return variable_tags_string
 
     def __data_points(self,index):
         data_points_string=""
