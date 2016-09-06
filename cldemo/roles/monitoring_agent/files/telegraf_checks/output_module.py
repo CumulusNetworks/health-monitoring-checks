@@ -80,5 +80,5 @@ class ExportData(object):
             for data_column in data_element:
                 # data += " %s=%s" % (data_column,data_element[data_column])
                 data.append("%s=%s" % (data_column,data_element[data_column]))
-            output += "%s,%s %s\n" % (self.data_set_name,', '.join(self.__fixed_tags()),', '.join(data))
+            output += "%s,%s %s\n" % (self.data_set_name,','.join(self.__fixed_tags()),','.join(data))
         return output
