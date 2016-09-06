@@ -6,6 +6,10 @@ import subprocess
 from output_module import ExportData
 
 #This module uses the psutil library to pull cpu, memory, disk.
+# Install required dependencies:
+# sudo apt-get install gcc python-dev python-pip
+# pip install psutil
+
 # Collect Output
 output=None
 

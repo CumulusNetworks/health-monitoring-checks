@@ -23,7 +23,7 @@ class ExportData(object):
         # fixed_tags can optionally be provided in a dict upong DS declaration
         if fixed_tags==None:
             self.fixed_tags={'host':gethostname()}
-        elif type(fixed_tags) is dict: 
+        elif type(fixed_tags) is dict:
             self.fixed_tags = fixed_tags
             self.fixed_tags['host']=gethostname()
         else:
@@ -31,10 +31,10 @@ class ExportData(object):
             exit(1)
 
         # variable_tags can optionally be provided in a dict upong DS declaration
-        if variable_tags==None: 
+        if variable_tags==None:
             self.variable_tags = []
             if data != None: self.variable_tags.append({})
-        elif type(variable_tags) is dict: 
+        elif type(variable_tags) is dict:
             self.variable_tags = [variable_tags]
         else:
             print "ERROR: if passing variable_tags, type must be a dict!"
@@ -91,7 +91,7 @@ class ExportData(object):
     def __fixed_tags(self):
         fixed_tags_string=""
         for tag in self.fixed_tags:
-            fixed_tags_string+= "%s=%s," % (tag,self.fixed_tags[tag])
+            fixed_tags_string+= "%s=%s" % (tag,self.fixed_tags[tag])
         return fixed_tags_string
 
     def __variable_tags(self,index):
