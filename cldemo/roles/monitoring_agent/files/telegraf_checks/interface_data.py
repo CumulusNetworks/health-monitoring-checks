@@ -27,8 +27,8 @@ def collect_data():
 
     for item in parsed_output:
         #data.add_row({variable_tags},{data})
-        data.add_row({"interface":item},{"linkstate":parsed_output[item]['linkstate']})
-        data.add_row({"interface":item},{"speed":parsed_output[item]['speed']})
+        data.add_row({"interface":item},{"linkstate":'"'+parsed_output[item]['linkstate']+'"'})
+        data.add_row({"interface":item},{"speed":'"'+parsed_output[item]['speed']+'"'})
 
     #Use this to sanity check the datastructure
     #data.show_data()
