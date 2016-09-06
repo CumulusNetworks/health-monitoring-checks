@@ -180,7 +180,7 @@
 [[inputs.exec]]
   # this script requires sudo privileges. When run through 'telegraf -test'
   # you must be sudo (sudo telegraf -test)
-  commands = ['python /etc/telegraf/checks/bgp_neighbor_data.py', 'python /etc/telegraf/checks/hwenv_data.py', 'python /etc/telegraf/checsks/lldp_data.py']
+  commands = ['python /etc/telegraf/checks/bgp_neighbor_data.py', 'python /etc/telegraf/checks/hwenv_data.py', 'python /etc/telegraf/checks/interface_data.py', 'python /etc/telegraf/checks/lldp_data.py', 'python /etc/telegraf/checks/sysenv_data.py']
   data_format = "influx"
   timeout = "5s"
 
