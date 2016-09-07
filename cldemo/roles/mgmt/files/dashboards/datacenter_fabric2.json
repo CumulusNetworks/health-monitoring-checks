@@ -574,7 +574,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": false
+              "show": true
             },
             {
               "format": "short",
@@ -759,7 +759,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": false
+              "show": true
             },
             {
               "format": "short",
