@@ -43,7 +43,7 @@
 # Only run this if the REST call returned 200
 - name: Record URI key as local var
   lineinfile:
-    dest: roles/servers/vars/main.yml
+    dest: roles/mgmt/vars/main.yml
     regexp: "api_key:"
     line: "  api_key: \"{{webpage.json.key}}\""
   delegate_to: localhost
@@ -97,17 +97,17 @@
 #  "dashboard":
 # to the beginning of the file (with a closing } at the end)
 #
-- name: Add main dashboard
-  uri:
-    url: "http://localhost:3000/api/dashboards/db"
-    method: POST
-    # For dashboards build before Grafana 3.1, change this to
-    # body_format: raw
-    body_format: json
-    HEADER_Authorization: "Bearer {{ grafana.api_key }}"
-    HEADER_Content-Type: "application/json"
-    body: "{{ lookup('file', 'dashboards/datacenter_fabric.json') }}"
-  ignore_errors: yes
+# - name: Add main dashboard
+#   uri:
+#     url: "http://localhost:3000/api/dashboards/db"
+#     method: POST
+#     # For dashboards build before Grafana 3.1, change this to
+#     # body_format: raw
+#     body_format: json
+#     HEADER_Authorization: "Bearer {{ grafana.api_key }}"
+#     HEADER_Content-Type: "application/json"
+#     body: "{{ lookup('file', 'dashboards/datacenter_fabric.json') }}"
+#   ignore_errors: yes
 
 - name: Add main dashboard
   uri:
@@ -119,16 +119,4 @@
     HEADER_Authorization: "Bearer {{ grafana.api_key }}"
     HEADER_Content-Type: "application/json"
     body: "{{ lookup('file', 'dashboards/datacenter_fabric2.json') }}"
-  ignore_errors: yes
-
-- name: Add main dashboard
-  uri:
-    url: "http://localhost:3000/api/dashboards/db"
-    method: POST
-    # For dashboards build before Grafana 3.1, change this to
-    # body_format: raw
-    body_format: json
-    HEADER_Authorization: "Bearer {{ grafana.api_key }}"
-    HEADER_Content-Type: "application/json"
-    body: "{{ lookup('file', 'dashboards/datacenter_fabric3.json') }}"
   ignore_errors: yes
