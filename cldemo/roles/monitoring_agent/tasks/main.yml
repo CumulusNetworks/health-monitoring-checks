@@ -1,4 +1,12 @@
 ---
+- name: Install gcc dependency for scripts
+  apt:
+    name: {{item}}
+  with_items:
+    - gcc
+    - python-dev
+    - python-pip
+
 - name: Add Telegraf repo key
   apt_key:
     url: https://repos.influxdata.com/influxdb.key
@@ -21,7 +29,7 @@
     state: started
     enabled: yes
 
-- name: Add telegraph to vtysh sudo users
+- name: Add telegraph to sudo users for vtysh fping lldpctl cl-netstat smonctl
   lineinfile:
     dest: "/etc/sudoers"
     regexp: '^telegraf'
