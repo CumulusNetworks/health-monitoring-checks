@@ -43,6 +43,7 @@ telegraf:
     database_ip: "192.168.0.254"
     username: "admin"
     password: "admin"
+    retention: "autogen"
 scripts:
   - "bgp_neighbor_data.py"
   - "hwenv_data.py"

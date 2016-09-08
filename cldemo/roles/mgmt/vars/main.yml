@@ -1,3 +1,3 @@
 grafana:
   # yamllint disable-line
-  api_key: "eyJrIjoib1oxOXpPZG5pU3JQdXpOQ2hkTWwwWk82NnYyRUM1bmYiLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
+  api_key: "eyJrIjoiU0JLcktPeVRqVW5RSkQ4eWNUTUNjZHBpSWNBb2hEUFEiLCJuIjoiYW5zaWJsZV9rZXkiLCJpZCI6MX0="
