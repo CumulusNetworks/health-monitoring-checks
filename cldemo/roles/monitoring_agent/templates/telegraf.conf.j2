@@ -81,7 +81,7 @@
   precision = "s"
 
   ## Retention policy to write to.
-  retention_policy = {{ telegraf.influxdb.retention }}
+  retention_policy = "{{ telegraf.influxdb.retention }}"
   ## Write consistency (clusters only), can be: "any", "one", "quorom", "all"
   write_consistency = "any"
 
