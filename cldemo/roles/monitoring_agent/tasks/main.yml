@@ -1,11 +1,14 @@
 ---
-- name: Install gcc dependency for scripts
+- name: Install gcc and python dependency for scripts
   apt:
     name: {{item}}
   with_items:
     - gcc
     - python-dev
     - python-pip
+
+- name: Install psutil via pip
+  pip: name=psutil
 
 - name: Add Telegraf repo key
   apt_key:
