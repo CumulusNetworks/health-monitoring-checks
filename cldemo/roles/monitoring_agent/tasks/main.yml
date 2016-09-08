@@ -1,7 +1,6 @@
 ---
 - name: Install gcc and python dependency for scripts
-  apt:
-    name: {{ item }}
+  apt: name={{ item }} update_cache=yes state=present
   with_items:
     - gcc
     - python-dev
