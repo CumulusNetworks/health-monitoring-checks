@@ -1,7 +1,7 @@
 ---
 - name: Install gcc and python dependency for scripts
   apt:
-    name: {{item}}
+    name: {{ item }}
   with_items:
     - gcc
     - python-dev
