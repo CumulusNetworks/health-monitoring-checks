@@ -118,5 +118,5 @@
     body_format: json
     HEADER_Authorization: "Bearer {{ grafana.api_key }}"
     HEADER_Content-Type: "application/json"
-    body: "{{ lookup('file', 'dashboards/datacenter_fabric2.json') }}"
+    body: "{{ lookup('file', 'dashboards/datacenter_fabric.json') }}"
   ignore_errors: yes
