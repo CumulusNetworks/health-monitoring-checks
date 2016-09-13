@@ -1,0 +1,65 @@
+#!/usr/bin/python
+
+"""
+*FOR DEMO PURPOSES ONLY*
+
+
+Take fping output and convert it to a json
+The use the telegraf input plugin function to
+import the output. Output looks as follows
+metrics are in microseconds
+
+  network_latency,host=leaf01,neighbor=spine01,avg=300,min=200,max=500
+
+
+To use in telegraf insert the following into the telegraf.conf file
+
+ [[inputs.exec]]
+   commands = ['/usr/local/bin/fping_influxdb.py']
+   data_format = "influx"
+
+
+List of switches to ping is derived from netshow lldp json output.
+Assumes loopback are configured on each switch which is true for the SE demo.
+LLDP uses the loopback as the management IP if defined. I believe
+you can program lldp according to force it always use the loopback address
+as the mgmt ip.
+
+Author: Stanley Karunditu
+Copyright: Cumulus Networks
+License: MIT
+"""
+
+import subprocess
+import json
+import socket
+import re
+
+list_of_fping_hosts = {}
+exec_str = 'netshow lldp -j'
+output = subprocess.check_output(exec_str.split())
+neighbor_info = json.loads(output)
+
+for _k, _v in neighbor_info.items():
+    lldp_info = _v.get('iface_obj').get('lldp')[0]
+    nei_name = lldp_info.get('adj_hostname')
+    if re.match('spine|leaf', nei_name):
+        nei_ip = lldp_info.get('adj_mgmt_ip')
+        list_of_fping_hosts[nei_ip] = nei_name
+
+
+exec_str = 'sudo fping -H {{ interfaces[ansible_hostname].lo.ipv4 }} -i 1 -t 1 -p 1 -c 30 ' + \
+    ' '.join(list_of_fping_hosts.keys())
+output = subprocess.check_output(exec_str.split(), stderr=subprocess.STDOUT)
+final_output = output.split("\n\n")[1].split("\n")
+hash_output = dict()
+for entry in final_output:
+    if entry == '':
+        continue
+    split_it = entry.split()
+    host = split_it[0]
+    values = split_it[-1]
+    [min, avg, max] = values.split('/')
+    print "network_latency,host=%s,neighbor=%s avg=%s,min=%s,max=%s" % (
+        socket.gethostname(), list_of_fping_hosts[host],
+        float(avg)*1000, float(min)*1000, float(max)*1000)

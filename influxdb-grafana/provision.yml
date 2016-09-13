@@ -1,0 +1,47 @@
+---
+- hosts: xenials
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: Check python install
+      raw: which python
+      register: python_installed
+      ignore_errors: yes
+
+    - name: apt-get update
+      raw: apt-get update -qq
+      when: not python_installed.rc == 0
+
+    - name: Install python 2.7
+      raw: apt-get install -qq python2.7
+      when: not python_installed.rc == 0
+
+    - name: Link Python 2.7
+      raw: sudo ln -s /usr/bin/python2.7 /usr/bin/python
+      when: not python_installed.rc == 0
+
+- hosts: servers
+  become: yes
+  roles:
+    - servers
+  handlers:
+    - include: handlers/main.yml
+      static: yes
+
+- hosts: spines
+  become: yes
+  roles:
+    - network_common
+    - spines
+  handlers:
+    - include: handlers/main.yml
+      static: yes
+
+- hosts: leafs
+  become: yes
+  roles:
+    - network_common
+    - leafs
+  handlers:
+    - include: handlers/main.yml
+      static: yes

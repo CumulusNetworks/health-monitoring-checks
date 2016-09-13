@@ -1,0 +1,15 @@
+---
+# This adds 2x-3x to the provisioning time. Uncomment if desired.
+# - name: Run system apt upgrade
+#   apt:
+#     upgrade: dist
+#     update_cache: yes
+
+- include: ifupdown2.yml
+- include: quagga_install.yml
+- include: netshow.yml
+- include: network_configs.yml
+- include: influxdb.yml
+  when: ansible_hostname != "server2"
+- include: grafana.yml
+  when: ansible_hostname != "server2"

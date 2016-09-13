@@ -1,0 +1,26 @@
+---
+- name: Add Influxdb apt key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: Add Influxdb apt repo
+  apt_repository:
+    repo: "deb https://repos.influxdata.com/debian jessie stable"
+    state: present
+
+- name: Install Influxdb
+  apt:
+    name: influxdb
+    update_cache: yes
+    state: present
+
+- name: Start influxdb service
+  service:
+    name: influxdb
+    state: started
+    enabled: yes
+
+- name: Create database
+  uri:
+    url: "http://localhost:8086/query?q=CREATE+DATABASE+network"

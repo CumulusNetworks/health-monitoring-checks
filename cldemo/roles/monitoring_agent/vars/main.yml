@@ -1,0 +1,53 @@
+---
+interfaces:
+
+  leaf01:
+    lo:
+      ipv6: "fd::10:11/128"
+      ipv4: "10.0.0.11/32"
+    role: "leaf"
+
+  leaf02:
+    lo:
+      ipv6: "fd::10:12/128"
+      ipv4: "10.0.0.12/32"
+    role: "leaf"
+
+  leaf03:
+    lo:
+      ipv6: "fd::10:13/128"
+      ipv4: "10.0.0.13/32"
+    role: "leaf"
+
+  leaf04:
+    lo:
+      ipv6: "fd::10:14/128"
+      ipv4: "10.0.0.14/32"
+    role: "leaf"
+
+  spine01:
+    lo:
+      ipv6: "fd::10:21/128"
+      ipv4: "10.0.0.21/32"
+    role: "spine"
+
+  spine02:
+    lo:
+      ipv6: "fd::10:22/128"
+      ipv4: "10.0.0.22/32"
+    role: "spine"
+
+telegraf:
+  influxdb:
+    database: "network"
+    database_ip: "192.168.0.254"
+    username: "admin"
+    password: "admin"
+    retention: "autogen"
+scripts:
+  - "bgp_neighbor_data.py"
+  - "hwenv_data.py"
+  - "interface_data.py"
+  - "lldp_data.py"
+  - "output_module.py"
+  - "sysenv_data.py"
