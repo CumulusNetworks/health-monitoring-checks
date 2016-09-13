@@ -56,6 +56,8 @@ Quickstart: Run the demo
     git checkout influx-grafana
     cd cldemo
     ansible-playbook main.yml
+    with VirtualBox or Vagrant, forward port 3000 on the NAT enabled NIC
+    Open a web browser on your local machine, navigate to http://localhost:3000 . Once logged in, click on the grafana logo in the top right of the browser. Navigate the drop down menu to dashboards, then import. Import the json file from /health-monitoring-checks/cldemo/roles/mgmt/files/dashboards . 
 
 ## License and Authors
 
