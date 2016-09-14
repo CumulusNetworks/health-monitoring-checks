@@ -23,6 +23,45 @@ Networks.
 4. Push to the branch (`git push origin my-new-feature`).
 5. Create new Pull Request.
 
+
+Quickstart: Run the demo
+------------------------
+(This assumes you are running Ansible 1.9.4 and Vagrant 1.8.4 on your host.)
+
+    Create the virtual network:
+    git clone https://github.com/cumulusnetworks/cldemo-vagrant
+    cd cldemo-vagrant
+    vagrant up oob-mgmt-server oob-mgmt-switch leaf01 leaf02 leaf03 leaf04 spine01 spine02 server01 server02 server03 server04
+    vagrant ssh oob-mgmt-server
+    sudo su - cumulus
+    sudo apt-get install software-properties-common -y
+    sudo apt-add-repository ppa:ansible/ansible -y
+    sudo apt-get update
+    sudo apt-get install ansible -qy
+    -
+    Setting up the base network:
+    git clone https://github.com/cumulusnetworks/cldemo-automation-ansible
+    cd cldemo-automation-ansible
+    git checkout full-reference-topology
+    ansible-playbook run-demo.yml
+    ssh server01
+    wget 172.16.2.101
+    cat index.html
+    exit to oob-mgmt-server
+    -
+    Specific to Monitoring:
+    cd..
+    git clone https://github.com/CumulusNetworks/health-monitoring-checks/
+    cd health-monitoring-checks/
+    git checkout influx-grafana
+    cd cldemo
+    ansible-playbook main.yml
+    -
+    Getting to the Dashboard:
+    With VirtualBox or Vagrant, forward port 3000 on the NAT enabled NIC
+    Open a web browser on your local machine, navigate to http://localhost:3000 . Once logged in, click on the grafana logo in the top right of the browser. Navigate the drop down menu to dashboards, then import. 
+    Import the json file from /health-monitoring-checks/cldemo/roles/mgmt/files/dashboards . 
+
 ## License and Authors
 
 * Author:: Cumulus Networks Inc.
