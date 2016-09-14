@@ -1,3 +1,0 @@
----
-- include: influxdb.yml
-- include: grafana.yml
