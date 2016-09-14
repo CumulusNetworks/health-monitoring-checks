@@ -6,8 +6,11 @@
     - python-dev
     - python-pip
 
-- name: Install psutil via pip
-  pip: name=psutil
+- name: Install python packages via pip
+  pip: name={{ item }}
+  with_items:
+    - psutil
+    - pygtail
 
 - name: Add Telegraf repo key
   apt_key:
