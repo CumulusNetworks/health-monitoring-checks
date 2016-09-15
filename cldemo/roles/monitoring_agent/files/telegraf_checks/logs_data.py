@@ -1,6 +1,8 @@
 from pygtail import Pygtail
 import sys
 from output_module import ExportData
+from socket import gethostname
+
 
 """
 Collects log information and uploads it as a metric
@@ -20,7 +22,7 @@ def parse_logs():
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             peer = line.split(' ')[5]
         if len(reason) > 0 and len(peer) > 0:
-            data.add_row({"msg":"log"},{"reason":'"'+reason+'"',"peer":'"'+peer+'"'})
+            data.add_row({"msg":"log"},{"reason":'"'+reason+"on"+gethostname()+"from"+peer+'"',"peer":'"'+peer+'"'})
             reason = ""
             peer = ""
 
