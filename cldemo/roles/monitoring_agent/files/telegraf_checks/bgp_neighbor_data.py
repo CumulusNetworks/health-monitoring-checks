@@ -49,7 +49,7 @@ def bgp_neighbor_information():
     # BGP is configured and peers exist.
 
     data = ExportData("bgpstat")
-    data.add_row({},{"num_peers":len(json_neighbor_sum["peers"])})
+    num_peers=0
 
     for peer in json_neighbor_sum["peers"].keys():
 
@@ -59,6 +59,8 @@ def bgp_neighbor_information():
         if len(peer_output) == 0:
             print("No neighbor output for peer" + peer + ".")
             exit(3)
+        else:
+            num_peers += 1
 
         peer_output_json = json.loads(peer_output.decode('utf-8'))
 
@@ -69,6 +71,8 @@ def bgp_neighbor_information():
             # bgpstat,host=leaf1,peer=swp2 totalSent=6520
             # print("bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat.encode('ascii') + "=" + str(value))
             data.add_row({"peer":peer},{stat:str(value)})
+    # data.add_row({},{"num_peers":len(json_neighbor_sum["peers"])})
+    data.add_row({},{"num_peers":num_peers})
 
     #data.show_data()
     data.send_data("cli")
