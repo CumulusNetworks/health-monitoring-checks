@@ -9,15 +9,18 @@ Collects log information and uploads it as a metric
 
 def parse_logs():
     data = ExportData("logs")
+    reason = ""
+    peer = ""
 
     for line in Pygtail("/var/log/syslog"):
         # print line
         if "sent to neighbor" in line:
-            reason=line.split('(')[1].split(')')[0]
+            reason = line.split('(')[1].split(')')[0]
         if "Down BGP Notification" in line:
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
-            peer=line.split(' ')[5]
-        data.add_row({"msg":"log"},{"reason":reason,"peer":peer})
+            peer = line.split(' ')[5]
+        if len(reason) > 0 and len(peer) > 0:
+            data.add_row({"msg":"log"},{"reason":reason,"peer":peer})
 
     data.show_data()
     data.send_data("cli")
