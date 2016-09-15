@@ -52,6 +52,11 @@
     path: "/var/log/syslog"
     mode: 0744
 
+- name: change permissions on /var/log/syslog
+  file:
+    path: "/var/log/syslog"
+    mode: 0766
+
 # Note: This will create a memory leak before 3.1.0
 # See CM-11435 for details.
 # Restart quagga to recover memory
