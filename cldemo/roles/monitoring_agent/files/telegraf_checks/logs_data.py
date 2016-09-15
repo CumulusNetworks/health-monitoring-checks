@@ -20,9 +20,11 @@ def parse_logs():
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             peer = line.split(' ')[5]
         if len(reason) > 0 and len(peer) > 0:
-            data.add_row({"msg":"log"},{"reason":reason,"peer":peer})
+            data.add_row({"msg":"log"},{"reason":'"'+reason+'"',"peer":'"'+peer+'"'})
+            reason = ""
+            peer = ""
 
-    data.show_data()
+    # data.show_data()
     data.send_data("cli")
 
 parse_logs()
