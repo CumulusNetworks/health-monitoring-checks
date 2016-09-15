@@ -53,14 +53,16 @@ def bgp_neighbor_information():
 
     for peer in json_neighbor_sum["peers"].keys():
 
+        if json_neighbor_sum["peers"]["state"] == "Established":
+            print json_neighbor_sum["peers"]["state"]
+            num_peers += 1
+
         peer_output = run_json_command(
             [sudo, vtysh, "-c", 'show ip bgp neighbor ' + peer + ' json'])
 
         if len(peer_output) == 0:
             print("No neighbor output for peer" + peer + ".")
             exit(3)
-        else:
-            num_peers += 1
 
         peer_output_json = json.loads(peer_output.decode('utf-8'))
 
