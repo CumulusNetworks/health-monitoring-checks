@@ -5,7 +5,8 @@ from socket import gethostname
 
 
 """
-Collects log information and uploads it as a metric
+Collects log information and uploads it as a metric.
+Uses the pygtail library which is installed via pip
 """
 
 

@@ -1,4 +1,5 @@
 ---
+# scripts require these packages.
 - name: Install gcc and python dependency for scripts
   apt: name={{ item }} update_cache=yes state=present
   with_items:
@@ -6,6 +7,8 @@
     - python-dev
     - python-pip
 
+#psutil is installed for sysenv_data.py
+#pygtail is installed for logs_data.py
 - name: Install python packages via pip
   pip: name={{ item }}
   with_items:
@@ -47,6 +50,7 @@
     append: yes
     groups: adm
 
+### Below is my ineloquent way to allow the logs_data.py to properly read syslog
 - name: change permissions on /var/log/syslog
   file:
     path: "/var/log/syslog"
