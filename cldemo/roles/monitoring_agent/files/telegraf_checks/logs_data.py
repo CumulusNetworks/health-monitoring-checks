@@ -13,7 +13,7 @@ def parse_logs():
     for line in Pygtail("/var/log/syslog"):
         print line
         if "Down BGP Notification" in line:
-            print "found again" + line
+            print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             data.add_row = [{"msg":"log"},{"peer":'"'+str(line.split(' ')[5])+'"',"reason":"Hold Timer Expired?"}]
         # sys.stdout.write(line)
     data.send_data("cli")
