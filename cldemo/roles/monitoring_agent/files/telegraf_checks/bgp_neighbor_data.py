@@ -53,8 +53,8 @@ def bgp_neighbor_information():
 
     for peer in json_neighbor_sum["peers"].keys():
 
-        if json_neighbor_sum["peers"]["state"] == "Established":
-            print json_neighbor_sum["peers"]["state"]
+        #Check if the current state of the peer is establishes to count number of up peers
+        if json_neighbor_sum["peers"][peer]["state"] == "Established":
             num_peers += 1
 
         peer_output = run_json_command(
