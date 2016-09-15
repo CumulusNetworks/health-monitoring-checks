@@ -12,6 +12,8 @@ def parse_logs():
 
     for line in Pygtail("/var/log/syslog"):
         # print line
+        if "sent to neighbor" in line:
+            data.add_row({"msg":"log"},{"peer":'"'+str(line.split('(')[1].split(')'))+'"'})
         if "Down BGP Notification" in line:
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             data.add_row({"msg":"log"},{"peer":'"'+str(line.split(' ')[5])+'"',"reason":"Hold Timer Expired?"})
