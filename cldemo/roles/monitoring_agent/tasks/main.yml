@@ -54,7 +54,7 @@
 
 - name: change permissions on /var/log/syslog
   file:
-    path: "/var/log/syslog"
+    path: "/var/log/syslog.offset"
     mode: 0766
 
 # Note: This will create a memory leak before 3.1.0
