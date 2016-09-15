@@ -2,20 +2,21 @@ from pygtail import Pygtail
 import sys
 from output_module import ExportData
 
-
-tmp_output = []
-tmp_line = ""
-
+"""
+Collects log information and uploads it as a metric
+"""
 
 
 def parse_logs():
     data = ExportData("logs")
+
     for line in Pygtail("/var/log/syslog"):
-        print line
+        # print line
         if "Down BGP Notification" in line:
-            print "***found*** " + '"'+str(line.split(' ')[5])+'"'
+            # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             data.add_row = [{"msg":"log"},{"peer":'"'+str(line.split(' ')[5])+'"',"reason":"Hold Timer Expired?"}]
-        # sys.stdout.write(line)
+
+    data.show_data()
     data.send_data("cli")
 
 parse_logs()
