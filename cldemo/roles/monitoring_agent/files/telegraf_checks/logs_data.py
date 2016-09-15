@@ -13,7 +13,7 @@ def parse_logs():
     for line in Pygtail("/var/log/syslog"):
         # print line
         if "sent to neighbor" in line:
-            peer=line.split('(')[1].split(')')[0]
+            reason=line.split('(')[1].split(')')[0]
         if "Down BGP Notification" in line:
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             peer=line.split(' ')[5]
