@@ -14,7 +14,7 @@ def parse_logs():
         # print line
         if "Down BGP Notification" in line:
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
-            data.add_row = [{"msg":"log"},{"peer":'"'+str(line.split(' ')[5])+'"',"reason":"Hold Timer Expired?"}]
+            data.add_row({"msg":"log"},{"peer":'"'+str(line.split(' ')[5])+'"',"reason":"Hold Timer Expired?"})
 
     data.show_data()
     data.send_data("cli")
