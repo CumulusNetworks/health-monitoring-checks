@@ -38,7 +38,7 @@
   lineinfile:
     dest: "/etc/sudoers"
     regexp: '^telegraf'
-    line: 'telegraf ALL=(root) NOPASSWD: /usr/bin/vtysh,/usr/bin/fping,/usr/sbin/lldpctl,/usr/cumulus/bin/cl-netstat,/usr/sbin/smonctl'
+    line: 'telegraf ALL=(root) NOPASSWD: /usr/bin/vtysh,/usr/bin/fping,/usr/sbin/lldpctl,/usr/cumulus/bin/cl-netstat,/usr/sbin/smonctl,/var/log/syslog,/usr/local/bin/pygtail'
     validate: 'visudo -cf %s'
 
 - name: add telegraf to adm group so that it can run lldpctl without errors
@@ -59,6 +59,7 @@
     - { script: "lldp_data.py" }
     - { script: "output_module.py" }
     - { script: "sysenv_data.py" }
+    - { script: "logs_data.py" }
 
 - name: Install ujson binary
   copy:
