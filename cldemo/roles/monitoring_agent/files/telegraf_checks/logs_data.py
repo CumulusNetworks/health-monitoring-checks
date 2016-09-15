@@ -23,7 +23,7 @@ def parse_logs():
             # print "***found*** " + '"'+str(line.split(' ')[5])+'"'
             peer = line.split(' ')[5]
         if len(reason) > 0 and len(peer) > 0:
-            data.add_row({"msg":"log"},{"reason":'"'+reason+"on"+gethostname()+"from"+peer+'"',"peer":'"'+peer+'"'})
+            data.add_row({"msg":"log"},{"reason":'"'+reason+" on "+gethostname()+" from "+peer+'"',"peer":'"'+peer+'"'})
             reason = ""
             peer = ""
 
