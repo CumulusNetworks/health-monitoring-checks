@@ -77,6 +77,7 @@
           },
           "lines": true,
           "linewidth": 2,
+          "links": [],
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
@@ -128,7 +129,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Panel Title",
+          "title": "CPU Usage",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1525,11 +1526,22 @@
     ]
   },
   "annotations": {
-    "list": []
+    "list": [
+      {
+        "name": "BGP failure",
+        "datasource": "${DS_INFLUX}",
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "enable": true,
+        "query": "select reason,peer,host from logs where msg='log'",
+        "titleColumn": "BGP failure",
+        "tagsColumn": "log",
+        "textColumn": "BGP has failed"
+      }
+    ]
   },
   "refresh": "5s",
   "schemaVersion": 12,
-  "version": 17,
+  "version": 2,
   "links": [],
   "gnetId": null
 }
