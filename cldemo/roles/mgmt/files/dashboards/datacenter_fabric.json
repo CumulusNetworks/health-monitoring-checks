@@ -54,7 +54,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -164,7 +164,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -273,7 +273,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -391,7 +391,7 @@
       "panels": [
         {
           "columns": [],
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fontSize": "100%",
@@ -507,7 +507,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -670,7 +670,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -842,7 +842,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -990,7 +990,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -1147,7 +1147,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "influxdb",
+          "datasource": "influx",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -1476,7 +1476,7 @@
     "list": [
       {
         "current": {},
-        "datasource": "influxdb",
+        "datasource": "influx",
         "hide": 0,
         "includeAll": false,
         "multi": true,
@@ -1490,7 +1490,7 @@
       },
       {
         "current": {},
-        "datasource": "influxdb",
+        "datasource": "influx",
         "hide": 0,
         "includeAll": false,
         "multi": true,
@@ -1503,7 +1503,7 @@
       },
       {
         "current": {},
-        "datasource": "influxdb",
+        "datasource": "influx",
         "hide": 0,
         "includeAll": false,
         "multi": true,
@@ -1515,7 +1515,7 @@
       },
       {
         "current": {},
-        "datasource": "influxdb",
+        "datasource": "influx",
         "hide": 0,
         "includeAll": false,
         "multi": true,
@@ -1530,7 +1530,7 @@
   "annotations": {
     "list": [
       {
-        "datasource": "influxdb",
+        "datasource": "influx",
         "enable": true,
         "iconColor": "rgba(255, 96, 96, 1)",
         "name": "BGP failure",
