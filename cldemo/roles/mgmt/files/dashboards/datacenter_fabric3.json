@@ -1,4 +1,6 @@
 {
+  "dashboard":
+{
   "__inputs": [
     {
       "name": "DS_INFLUX",
@@ -1544,4 +1546,5 @@
   "version": 3,
   "links": [],
   "gnetId": null
+}
 }
