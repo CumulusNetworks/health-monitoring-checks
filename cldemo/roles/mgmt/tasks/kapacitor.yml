@@ -1,0 +1,25 @@
+---
+- name: Install Kapacitor
+  apt:
+    name: kapacitor
+    update_cache: yes
+    state: present
+
+- name: Apply Kapacitor configuration
+  template: src=kapacitor.conf.j2 dest==/etc/kapacitor/kapacitor.conf backup=yes
+  notify: restart kapacitor
+
+- name: copy alerting tick script
+  copy: src=kapacitor_checks/{{ item.script }} dest=/etc/kapacitor/checks/
+  with_items:
+    - { script: "bgp_failed_peers.tick" }
+
+- name: install alerting tick scripts into kapacitor
+  command: kapacitor define -name  {{ item.name }} -type stream -tick {{ item.script}} -dbrp "network"."two_hours"
+  with_items:
+    - { name: "bgp_failed_peers", script: "bgp_failed_peers.tick"}
+
+- name: enable alerting scripts
+  command: kapacitor enable {{ item.name }}
+  with_items:
+    - { name: "bgp_failed_peers", script: "bgp_failed_peers.tick"}

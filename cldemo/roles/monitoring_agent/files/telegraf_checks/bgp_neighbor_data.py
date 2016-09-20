@@ -50,12 +50,16 @@ def bgp_neighbor_information():
 
     data = ExportData("bgpstat")
     num_peers=0
+    failed_peers=0
 
     for peer in json_neighbor_sum["peers"].keys():
 
         #Check if the current state of the peer is establishes to count number of up peers
         if json_neighbor_sum["peers"][peer]["state"] == "Established":
             num_peers += 1
+        else:
+            failed_peers += 1
+
 
         peer_output = run_json_command(
             [sudo, vtysh, "-c", 'show ip bgp neighbor ' + peer + ' json'])
@@ -74,7 +78,7 @@ def bgp_neighbor_information():
             # print("bgpstat,host=" + socket.gethostname() + ",peer=" + peer + " " + stat.encode('ascii') + "=" + str(value))
             data.add_row({"peer":peer},{stat:str(value)})
     # data.add_row({},{"num_peers":len(json_neighbor_sum["peers"])})
-    data.add_row({},{"num_peers":num_peers})
+    data.add_row({},{"num_peers":num_peers, "failed_peers":failed_peers})
 
     #data.show_data()
     data.send_data("cli")
