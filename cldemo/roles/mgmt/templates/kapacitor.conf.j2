@@ -17,16 +17,15 @@ data_dir = "/var/lib/kapacitor"
 [replay]
   dir = "/var/lib/kapacitor/replay"
 
-[task]
-  dir = "/var/lib/kapacitor/tasks"
-  snapshot-interval = "60s"
+[storage]
+  boltdb = "/var/lib/kapacitor/kapacitor.db"
 
 [[influxdb]]
   enabled = true
   default = true
   name = "localhost"
   urls = ["http://localhost:8086"]
-  username = "{{ kapaacitor.username }}"
+  username = "{{ kapacitor.username }}"
   password = " {{ kapacitor.password }}"
   timeout = 0
   insecure-skip-verify = false
@@ -34,7 +33,7 @@ data_dir = "/var/lib/kapacitor"
   udp-read-buffer = 0
 
   [influxdb.subscriptions]
-    sedemo = ["two_hours"]
+    {{ kapacitor.database }} = ["autogen"]
   [influxdb.excluded-subscriptions]
 
 [slack]

@@ -5,5 +5,6 @@ grafana:
 kapacitor:
   username: "admin"
   password: "admin"
+  database: "network"
   slack_key: "https://hooks.slack.com/services/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"
-  slack_channe: "alerts"
+  slack_channel: "alerts"

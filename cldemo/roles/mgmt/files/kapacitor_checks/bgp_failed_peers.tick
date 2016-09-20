@@ -1,7 +1,8 @@
 stream
-  .from().measurement('bgpstat')
-  .groupBy('host')
-  .alert()
+  |from()
+    .measurement('bgpstat')
+  |groupBy('host')
+  |alert()
     .id('kapacitor/{{ index .Tags "host" }}')
     .message('BGP Peer Failure - {{ .ID }}. Alert Level is {{ .Level }}. Peer Failure Count: {{ index .Fields "failedPeers" }}')
     .crit(lambda: "failed_peers" > 0)
