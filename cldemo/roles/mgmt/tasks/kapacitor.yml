@@ -18,7 +18,7 @@
     - { script: "bgp_failed_peers.tick" }
 
 - name: install alerting tick scripts into kapacitor
-  command: kapacitor define {{ item.name }} -type stream -tick {{ item.script}} -dbrp "network"."autogen"
+  command: kapacitor define {{ item.name }} -type stream -tick /etc/kapacitor/checks/{{ item.script}} -dbrp "network"."autogen"
   with_items:
     - { name: "bgp_failed_peers", script: "bgp_failed_peers.tick"}
 
