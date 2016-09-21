@@ -9,6 +9,9 @@
   template: src=kapacitor.conf.j2 dest=/etc/kapacitor/kapacitor.conf backup=yes
   notify: restart kapacitor
 
+- name: Start Kapacitor if not started
+  service: name=kapacitor state=started
+
 - name: copy alerting tick script
   copy: src=kapacitor_checks/{{ item.script }} dest=/etc/kapacitor/checks/
   with_items:
