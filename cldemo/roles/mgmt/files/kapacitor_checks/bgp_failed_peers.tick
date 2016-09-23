@@ -4,7 +4,7 @@ stream
   |groupBy('host')
   |alert()
     .id('kapacitor/{{ index .Tags "host" }}')
-    .message('BGP Peer Failure - {{ .ID }}. Alert Level is {{ .Level }}. Peer Failure Count: {{ index .Fields "failedPeers" }}')
+    .message('BGP Peer Failure - {{ .ID }}. Alert Level is {{ .Level }}. Peer Failure Count: {{ index .Fields "failed_peers" }}')
     .crit(lambda: "failed_peers" > 0)
     .stateChangesOnly()
     .log('/tmp/alerts.log')
