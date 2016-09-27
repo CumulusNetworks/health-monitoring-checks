@@ -1,0 +1,25 @@
+---
+# NOTE: This playbook *adds* rules.
+# It does not delete existing rules.
+
+# Author: kevinw@cumulusnetworks.com
+# Strategy:
+# Uses "public" zone to add rules which allow http/https and the Grafana/InfluxDB/Telegraf ports for monitoring
+# 
+- name: Set public as default policy
+  command: firewall-cmd --set-default-zone=public
+
+- name: Allow http/https
+  command: firewall-cmd --zone=public --permanent --add-service=http --add-service=https
+
+- name: Open ports to InfluxDB from Telegraf nodes
+  command: firewall-cmd --permanent --zone=public --add-port=8000-8090/tcp
+
+- name: Open udp port to Grafana portal
+  command: firewall-cmd --permanent --zone=public --add-port=3000/tcp
+
+- name: Open udp port to Grafana portal
+  command: firewall-cmd --permanent --zone=public --add-port=3000/udp
+
+- name: Bounce firewalld
+  service: name=firewalld state=restarted

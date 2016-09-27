@@ -1,9 +1,6 @@
 ---
 - name: Install Kapacitor
-  apt:
-    name: kapacitor
-    update_cache: yes
-    state: present
+  yum: name=kapacitor state=present
 
 - name: Apply Kapacitor configuration
   template: src=kapacitor.conf.j2 dest=/etc/kapacitor/kapacitor.conf backup=yes

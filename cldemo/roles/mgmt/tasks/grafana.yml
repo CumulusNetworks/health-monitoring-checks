@@ -1,19 +1,18 @@
 ---
-- name: Add Grafana repo key
-  apt_key:
-    url: https://packagecloud.io/gpg.key
+- name: Add Grafana rpm key
+  rpm_key:
+    key: https://packagecloud.io/grafana/stable/gpgkey
     state: present
 
-- name: Add Grafana apt repo
-  apt_repository:
-    repo: "deb https://packagecloud.io/grafana/stable/debian/ jessie main"
-    state: present
+- name: Add repo
+  yum_repository:
+    name: grafana
+    description: grafana yum repo
+    baseurl: https://packagecloud.io/grafana/stable/el/7
+    gpgcheck: 0
 
 - name: Install grafana
-  apt:
-    name: grafana
-    update_cache: yes
-    state: present
+  yum: name=grafana state=present
 
 - name: Configure grafana service
   service:

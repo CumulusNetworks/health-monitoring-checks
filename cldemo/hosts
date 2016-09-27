@@ -3,16 +3,22 @@ leaf01
 leaf02
 leaf03
 leaf04
+leaf05
+leaf06
 
 [spines]
 spine01
 spine02
 
-[servers]
-server01
-server02
-server03
-server04
-
 [mgmt]
-oob-mgmt-server
+localhost ansible_connection=local
+
+[network:children]
+spines
+leafs
+
+[network:vars]
+ansible_connection=ssh
+ansible_user=cumulus
+ansible_sudo_pass=CumulusLinux!
+ansible_ssh_pass=CumulusLinux!

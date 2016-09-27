@@ -25,6 +25,18 @@ interfaces:
       ipv4: "10.0.0.14/32"
     role: "leaf"
 
+  leaf05:
+    lo:
+      ipv6: "fd::10:15/128"
+      ipv4: "10.0.0.15/32"
+    role: "leaf"
+
+  leaf06:
+    lo:
+      ipv6: "fd::10:16"
+      ipv4: "10.0.0.16/32"
+    role: "leaf"
+
   spine01:
     lo:
       ipv6: "fd::10:21/128"
@@ -40,7 +52,7 @@ interfaces:
 telegraf:
   influxdb:
     database: "network"
-    database_ip: "192.168.0.254"
+    database_ip: "172.16.30.1"
     username: "admin"
     password: "admin"
     retention: "autogen"
